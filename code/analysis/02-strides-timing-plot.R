@@ -21,7 +21,7 @@ theme_update(strip.text = element_text(size = 9),
              plot.title = element_text(hjust = 0.5, size = 11))
 
 # Read in data: -----------------------------------------------------------
-subset_dt <- readRDS(file = "data/data-for-strides-plot.rds")
+subset_dt <- readRDS(file = here::here("data", "data-for-strides-plot.rds"))
 
 # Basic settings from time variable: --------------------------------------
 sample_hz <- 200
@@ -134,7 +134,7 @@ p <- ggarrange(p1, p2, ncol = 1, nrow = 2)
 
 # Write as TikZ file: -----------------------------------------------------
 tikz(here::here("outputs", 
-                "plots",
+                "figures",
                 "subject-01-adjacent-strides-timings.tex"),
      width  = 1 * doc_width_inches, 
      height = 0.5 * doc_width_inches)
