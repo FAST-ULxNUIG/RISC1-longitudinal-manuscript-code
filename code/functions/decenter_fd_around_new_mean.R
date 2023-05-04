@@ -40,7 +40,7 @@ decenter_fd_around_new_mean <- function(fdobj, mean.fd.obj)
     }
   }
   fdnames      <- fdobj$fdnames
-  fdnames[[3]] <- paste("Centered", fdnames[[3]])
+  fdnames[[3]] <- paste("De-centered", fdnames[[3]])
   centerfdobj  <- fd(coef, basisobj, fdnames)
   return(centerfdobj)	
 }
