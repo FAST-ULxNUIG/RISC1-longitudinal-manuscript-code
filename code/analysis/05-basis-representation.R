@@ -296,7 +296,9 @@ for(k in 1:N_sub) {
 }
 
 
-
+hist(ve_loso_cv) # skewed. look at mean as well as median
+median(ve_loso_cv)
+mean(ve_loso_cv)
 
 loso_cv_dt <- data.table(ind = 1:N_sub,
                          ve_loso_cv = ve_loso_cv)
