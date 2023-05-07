@@ -331,7 +331,7 @@ save_list <- list(
   mfpc_dt = mfpc_dt
   )
 
-saveRDS(save_list, file = "outputs/basis-transformation-results.rds")
+saveRDS(save_list, file = here::here("outputs", "basis-transformation-results.rds"))
 
 
 
