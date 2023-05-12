@@ -35,6 +35,9 @@ Repeatedly-Observed Human-Movement Data’
       reconstruction](code/functions/variance_explained_reconstruction.R)
     - :page_facing_up: [Custom theme for
       figures](code/functions/theme_gunning.R)
+    - :page_facing_up: [Functions to generate data from a multilevel
+      lonfitudinal design for the
+      simulation](code/functions/generate_design.R)
     - :open_file_folder: **tests** – some basis tests for the functions.
       - :page_facing_up: [Test for
         `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
@@ -42,12 +45,15 @@ Repeatedly-Observed Human-Movement Data’
         `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
       - :page_facing_up: [Test for
         `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
+      - :page_facing_up: [Test for
+        `generate_design()`](code/functions/tests/test-generate-design.R)
 - :open_file_folder: **outputs**
-  - :open_file_folder: **tables** – tables conatining data-analysis
-    results.
+  - :open_file_folder: **tables** – tables containing data-analysis
+    results. Some are stored as `.csv` files while others have been
+    exported to $TeX$ using `{xtable}` for inclusion in the paper.
   - :open_file_folder: **figures** – figures for the manuscript, all
-    written in $TeX$ and linked to overleaf, where the file
-    [figures.tex](outputs/figures/figures.tex) compiles all the
+    created in $TeX$ using `{tikzDevice}` and linked to overleaf, where
+    the file [figures.tex](outputs/figures/figures.tex) compiles all the
     individual $TeX$ files.
   - 💾 also contains `.rds` objects saved at various stages of the data
     analysis
