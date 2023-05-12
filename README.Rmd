@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = TRUE)
       * :page_facing_up: [Test for `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
       * :page_facing_up: [Test for `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
       * :page_facing_up: [Test for `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
-      * :page_facing_up: [Test for `generate_design()`](code/functions/tests/test-generate-design.R)
+      * :page_facing_up: [Test for `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
 * :open_file_folder: **outputs**
    * :open_file_folder: **tables** -- tables containing data-analysis results. Some are stored as `.csv` files while others have been exported to $TeX$ using `{xtable}` for inclusion in the paper.
    * :open_file_folder: **figures** -- figures for the manuscript, all created in $TeX$ using `{tikzDevice}` and linked to overleaf, where the file [figures.tex](outputs/figures/figures.tex) compiles all the individual $TeX$ files.

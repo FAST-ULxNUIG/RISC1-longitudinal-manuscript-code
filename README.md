@@ -46,7 +46,7 @@ Repeatedly-Observed Human-Movement Data’
       - :page_facing_up: [Test for
         `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
       - :page_facing_up: [Test for
-        `generate_design()`](code/functions/tests/test-generate-design.R)
+        `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been
