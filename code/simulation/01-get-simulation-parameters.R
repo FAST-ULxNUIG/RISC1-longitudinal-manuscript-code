@@ -210,19 +210,7 @@ print(random_parameters_table,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Finally -- Make plot of the ten mv-FPCs ---------------------------------
+# Make plot of the ten mv-FPCs ---------------------------------
 plot_psi_dt <- data.table(
   t_grid = rep(grid_points, times = 3),
   dimension = factor(rep(c("Hip", "Knee", "Ankle"), each = length(grid_points)), levels = c("Hip", "Knee", "Ankle")),
@@ -259,3 +247,36 @@ tikz(file.path(plots_path, "Psi-simulation-plot.tex"),
 print(Psi_plot)
 dev.off()
 
+
+# Calculate Standard Deviation of Speed: ----------------------------------
+
+# silly, but routine, check:
+stopifnot(covariates_and_scores_dt_train[, uniqueN(speed_cent)==1, by = subject_id][, all(V1)])
+speed_sd <- covariates_and_scores_dt_train[, .(speed_cent = speed_cent[1]),
+                                           by = subject_id][, sd(speed_cent)]
+speed_sd
+
+# Now save everything: ----------------------------------------------------
+
+save_list <- list(
+  mfpca = mfpca,
+  Psi_array = Psi_array,
+  mu_array = mu_array,
+  k_sim = k_sim,
+  grid_points = grid_points,
+  longitudinal_grid = longitudinal_grid,
+  poly_basis = poly_basis,
+  poly_coefs = poly_coefs,
+  lme_simulation_list = lme_simulation_list,
+  Beta = Beta,
+  Q_star = Q_star,
+  R_star = R_star,
+  s_k_vec = s_k_vec,
+  speed_sd
+)
+
+saveRDS(object = save_list, file = file.path(
+  outputs_path,
+  "simulation",
+  "simulation-parameters.rds"
+))
