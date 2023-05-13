@@ -1,4 +1,4 @@
-# Function to generate mutliple-subject design in which an equal number of left and 
+# Function to generate multiple-subject design in which an equal number of left and 
 # right side observations are observed for each subject at alternating points on
 # an equally-spaced grid of points.
 generate_design_single_subject <- function(n_i, speed_sd) {
