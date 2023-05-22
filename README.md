@@ -59,7 +59,7 @@ Repeatedly-Observed Human-Movement Data’
       - :page_facing_up: [Test 1 for
         `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
       - :page_facing_up: [Test 2 for
-        `generate_basis_coefficient_matrix()`](code/functions/testtest-generate-basis-coefficient-matrix-02.R)
+        `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-02.R)
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been
