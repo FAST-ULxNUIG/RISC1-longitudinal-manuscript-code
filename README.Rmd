@@ -35,6 +35,7 @@ knitr::opts_chunk$set(echo = TRUE)
       * :page_facing_up: [Test for `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
        * :page_facing_up: [Test for `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
        * :page_facing_up: [Test 1 for `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
+       * :page_facing_up: [Test 2 for `generate_basis_coefficient_matrix()`](code/functions/testtest-generate-basis-coefficient-matrix-02.R)
 * :open_file_folder: **outputs**
    * :open_file_folder: **tables** -- tables containing data-analysis results. Some are stored as `.csv` files while others have been exported to $TeX$ using `{xtable}` for inclusion in the paper.
    * :open_file_folder: **figures** -- figures for the manuscript, all created in $TeX$ using `{tikzDevice}` and linked to overleaf, where the file [figures.tex](outputs/figures/figures.tex) compiles all the individual $TeX$ files.
