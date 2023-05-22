@@ -36,9 +36,16 @@ Repeatedly-Observed Human-Movement Data’
     - :page_facing_up: [Custom theme for
       figures](code/functions/theme_gunning.R)
     - :page_facing_up: [Functions to generate data from a multilevel
-      lonfitudinal design for the
+      longitudinal design for the
       simulation](code/functions/generate_design.R)
-    - :open_file_folder: **tests** – some basis tests for the functions.
+    - :page_facing_up: [Generate data from a polynomial scalar
+      longitudinal model for the
+      simulation](code/functions/generate_polynomial_model_basis_coefficient.R)
+    - :page_facing_up: [Generate multiple basis coefficients (i.e.,
+      mv-FPC scores) from a polynomial scalar longitudinal model for the
+      simulation](code/functions/generate-basis-coefficient-matrix.R)
+    - :open_file_folder: **tests** – some basic tests for the custom
+      functions.
       - :page_facing_up: [Test for
         `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
       - :page_facing_up: [Test for
@@ -47,6 +54,10 @@ Repeatedly-Observed Human-Movement Data’
         `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
       - :page_facing_up: [Test for
         `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
+      - :page_facing_up: [Test for
+        `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
+      - :page_facing_up: [Test 1 for
+        `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been

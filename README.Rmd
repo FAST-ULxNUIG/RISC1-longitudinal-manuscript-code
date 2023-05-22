@@ -25,12 +25,16 @@ knitr::opts_chunk$set(echo = TRUE)
     * :page_facing_up: [Project (multivariate) functional data (`fd` object) onto (multivariate) FPCs (`pca.fd` object)](code/functions/project_data_onto_fpcs.R)  
     * :page_facing_up: [Computing the (%) of Variance Explained by a mv-FPCA reconstruction](code/functions/variance_explained_reconstruction.R)
     * :page_facing_up: [Custom theme for figures](code/functions/theme_gunning.R)
-    * :page_facing_up: [Functions to generate data from a multilevel lonfitudinal design for the simulation](code/functions/generate_design.R)
-    * :open_file_folder: **tests** -- some basis tests for the functions.
+    * :page_facing_up: [Functions to generate data from a multilevel longitudinal design for the simulation](code/functions/generate_design.R)
+    * :page_facing_up: [Generate data from a polynomial scalar longitudinal model for the simulation](code/functions/generate_polynomial_model_basis_coefficient.R)
+    * :page_facing_up: [Generate multiple basis coefficients (i.e., mv-FPC scores) from a polynomial scalar longitudinal model for the simulation](code/functions/generate-basis-coefficient-matrix.R)
+    * :open_file_folder: **tests** -- some basic tests for the custom functions.
       * :page_facing_up: [Test for `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
       * :page_facing_up: [Test for `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
       * :page_facing_up: [Test for `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
       * :page_facing_up: [Test for `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
+       * :page_facing_up: [Test for `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
+       * :page_facing_up: [Test 1 for `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
 * :open_file_folder: **outputs**
    * :open_file_folder: **tables** -- tables containing data-analysis results. Some are stored as `.csv` files while others have been exported to $TeX$ using `{xtable}` for inclusion in the paper.
    * :open_file_folder: **figures** -- figures for the manuscript, all created in $TeX$ using `{tikzDevice}` and linked to overleaf, where the file [figures.tex](outputs/figures/figures.tex) compiles all the individual $TeX$ files.
