@@ -17,7 +17,6 @@ for(k in seq_len(K_test)) {
   R_star_test[,,k] <- diag(sim_param$R_star[,k])
 }
 
-
 s_k_test <- sim_param$s_k_vec
 Beta_k_test <- sim_param$Beta
 beta_poly_1_test <- Beta_k_test["$\\beta_{0, 1, k}^*$", ] 

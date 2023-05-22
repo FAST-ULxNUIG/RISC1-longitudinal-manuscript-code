@@ -56,7 +56,7 @@ generate_basis_coefficient_matrix <- function(design_df,
      )
   }
   # Check dimensions of outputted object: -----------------------------------
-  stopifnot(dim(design_df_new) == c(N, ncol(design_df) + K))
+  stopifnot(dim(design_df_new) == c(nrow(design_df), ncol(design_df) + K))
 
   # Return: -----------------------------------------------------------------
   design_df_new

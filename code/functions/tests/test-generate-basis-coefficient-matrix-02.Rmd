@@ -1,0 +1,124 @@
+---
+title: "test generate basis coefficients"
+author: "Edward Gunning"
+date: "2023-05-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, fig.height=10, fig.width=7.5}
+set.seed(2023)
+# More detailed test of function: -----------------------------------------
+# simulation used to assess lme fit of generated data on each simulation
+# iteration.
+source(here::here("code", "functions", "add_poly_to_df.R"))
+source(here::here("code", "functions", "generate_design.R"))
+source(here::here("code", "functions", "generate_polynomial_model_basis_coefficient.R"))
+source(here::here("code", "functions", "generate-basis-coefficient-matrix.R"))
+library(data.table) # CRAN v1.14.2
+library(parallel)
+n_cores <- detectCores() - 2
+
+# Some preliminary parameters: --------------------------------------------
+N_test <- 300
+n_i_test <- 50
+sim_param <- readRDS(file = here::here("outputs", "simulation", "simulation-parameters.rds"))
+K_test <- sim_param$k_sim
+R_star_test <- Q_star_test <- array(NA, c(3, 3, K_test))
+for(k in seq_len(K_test)) {
+  Q_star_test[,,k] <- diag(sim_param$Q_star[,k])
+  R_star_test[,,k] <- diag(sim_param$R_star[,k])
+}
+
+s_k_test <- sim_param$s_k_vec
+Beta_k_test <- sim_param$Beta
+beta_poly_1_test <- Beta_k_test["$\\beta_{0, 1, k}^*$", ] 
+beta_poly_2_test <- Beta_k_test["$\\beta_{0, 2, k}^*$", ]
+beta_poly_3_test <- Beta_k_test["$\\beta_{0, 3, k}^*$", ]
+beta_sex_test <- Beta_k_test["$\\beta_{1, k}^* $", ]
+beta_speed_cent_test <- Beta_k_test["$\\beta_{2, k}^* $", ]
+speed_sd_test <- 1.5
+longitudinal_grid <- seq(0, 1, by = 0.01)
+poly_basis <- poly(longitudinal_grid, degree = 2, raw = FALSE)
+
+
+# Generate data and add polynomials: --------------------------------------
+
+
+# Simulation to test: -----------------------------------------------------
+N_sim <- 100
+lme_test_list <- vector(mode = "list", length = N_sim)
+for(i in seq_len(N_sim)) {
+  print(paste0("Iteration", i))
+  # Generate data
+  test <- generate_design_multiple_subjects(N = N_test,
+                                            n_i = n_i_test, 
+                                            speed_sd = speed_sd_test)
+  # Add polynomials to it:
+  test_add_poly <- data.table(add_poly_to_df(df = test, poly_object = poly_basis))
+  
+  # Generate randoms score:
+  test_add_scores <- generate_basis_coefficient_matrix(design_df = test_add_poly, 
+                                                       N = N_test,
+                                                       K = K_test,
+                                                       beta_poly_1_vec = beta_poly_1_test, 
+                                                       beta_poly_2_vec = beta_poly_2_test,
+                                                       beta_poly_3_vec = beta_poly_3_test,
+                                                       beta_sex_vec = beta_sex_test,
+                                                       beta_speed_cent_vec = beta_speed_cent_test,
+                                                       Q_star_array = Q_star_test,
+                                                       R_star_array = R_star_test, 
+                                                       s_vec = s_k_test)
+
+  # Fit lme model to each generated score and store:
+  # (we will fit the 10 models in parralell on our 8 cores to speed things up a little!)
+  lme_test_list[[i]] <- mclapply(seq_len(k), FUN = function(k) {
+    formula_k <- formula(paste0("score_", k, "~ poly_1 + poly_2 + sex + speed_cent +
+                               (poly_1 + poly_2||subject_id) + 
+                               (poly_1 + poly_2||subject_id:side)"))
+    lmer(formula = formula_k, data = test_add_scores, control= lmerControl(optCtrl = list(xtol_rel=0,
+                                                                                        xtol_abs=1e-10,
+                                                                                        ftol_rel=0, 
+                                                                                        ftol_abs=1e-10)))
+  }, mc.cores = n_cores)
+  
+}
+
+
+
+for(k in seq_len(K_test)) {
+  fixef_estimates <- t(sapply(lme_test_list, function(x) fixef(x[[k]])))
+  par(mfrow = c(3, 2))
+  for(i in 1:5) {
+    boxplot(fixef_estimates[, i])
+    title(paste("Score", k, colnames(fixef_estimates)[i]))
+    abline(h = Beta_k_test[i, k])
+  }
+  
+  sk_estimate <- sapply(lme_test_list, function(x) {
+    attr(VarCorr(x[[k]]), "sc")
+  })
+  boxplot(sk_estimate)
+  abline(h = sqrt(s_k_test[k]))
+  title(paste("Score", k, "residual sd"))
+
+  
+  ranef_estimates <- t(sapply(lme_test_list, function(x) {
+    elements <- sapply(VarCorr(x[[k]]),
+                       function(y) {y})
+    elements[ c("subject_id.2", "subject_id.1", "subject_id",
+                "subject_id.side.2", "subject_id.side.1", "subject_id.side")]
+  }))
+  
+  ranef_truths <- c(diag(Q_star_test[,, k]), diag(R_star_test[,,k]))
+  par(mfrow = c(3, 2))
+  for(i in 1:6) {
+    boxplot(ranef_estimates[, i])
+    title(paste("Score", k, colnames(ranef_estimates)[i]))
+    abline(h = ranef_truths[i])
+  }
+}
+```
