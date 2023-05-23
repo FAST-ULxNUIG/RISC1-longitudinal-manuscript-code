@@ -44,6 +44,9 @@ Repeatedly-Observed Human-Movement Data’
     - :page_facing_up: [Generate multiple basis coefficients (i.e.,
       mv-FPC scores) from a polynomial scalar longitudinal model for the
       simulation](code/functions/generate-basis-coefficient-matrix.R)
+    - :page_facing_up: [Construct an `fd` object by combining pca.fd
+      object and matrix of PCA
+      scores](code/functions/construct_fd_from_scores.R)
     - :open_file_folder: **tests** – some basic tests for the custom
       functions.
       - :page_facing_up: [Test for
@@ -60,6 +63,8 @@ Repeatedly-Observed Human-Movement Data’
         `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
       - :page_facing_up: [Test 2 for
         `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-02.R)
+      - :page_facing_up: [Test for
+        `construct_fd_from_scores()`](code/functions/tests/test_construct_fd_from_scores.R)
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been
