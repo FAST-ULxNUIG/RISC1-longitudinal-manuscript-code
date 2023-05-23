@@ -1,0 +1,109 @@
+source(here::here("code", "functions", "decenter_fd_around_new_mean.R"))
+source(here::here("code", "functions", "construct_fd_from_scores.R"))       
+library(fda)     # CRAN v5.5.1
+library(funData) # CRAN v1.3-8
+library(MFPCA)   # CRAN v1.3-9
+
+set.seed(1996)
+# set up a grid of values:
+grid_test <- seq(0, 2 * pi, length.out = 101)
+# simulate bivariate functional data:
+simulated_MultiFunData <- simMultiFunData(type = "split",
+                                          argvals = list(grid_test, grid_test),
+                                          M = 5,
+                                          eFunType = "Fourier",
+                                          eValType = "exponential",
+                                          N = 500)
+
+
+plot(simulated_MultiFunData$simData)
+
+# convert to fda objects:
+fd_dim1 <- funData2fd(simulated_MultiFunData$simData[[1]])
+fd_dim2 <- funData2fd(simulated_MultiFunData$simData[[2]])
+
+par(mfrow = c(1, 2))
+plot(fd_dim1); plot(fd_dim2)
+
+# construct multivariate fd object:
+mfd_coef_array <- array(data = NA, dim = c(dim(fd_dim1$coefs), 2))
+mfd_coef_array[,,1] <- fd_dim1$coefs
+mfd_coef_array[,,2] <- fd_dim2$coefs
+mfd_obj <- fd(mfd_coef_array, basisobj = fd_dim1$basis)
+
+par(mfrow = c(1, 2))
+plot(mfd_obj)
+
+# Do pca and compare with MFPCA package: ----------------------------------
+pca_fd <- pca.fd(fdobj = mfd_obj, nharm = 5)
+
+
+MFPCA <- MFPCA(mFData = simulated_MultiFunData$simData, M = 5,
+      uniExpansions = list(list(type = "uFPCA"),
+                           list(type = "uFPCA")))
+
+par(mfrow = c(2, 2))
+plot(pca_fd$harmonics)
+plot(MFPCA$functions)
+
+
+
+# First test: -------------------------------------------------------------
+# if we use the observed scores we should get back original curves:
+scores <- apply(pca_fd$scores, c(1, 2), sum)
+reconstruct_in_sample <- construct_fd_from_scores(pca_fd_obj = pca_fd, scores_matrix = scores, K = 5)
+
+par(mfrow = c(2, 2))
+plot(mfd_obj[1:5])
+plot(reconstruct_in_sample[1:5])
+par(mfrow = c(1, 1))
+plot(mfd_obj - reconstruct_in_sample)
+# Looks good.
+
+
+# Second test: ------------------------------------------------------------
+# lets give just a single observation with 0 on every score
+# we should get back mean observation.
+reconstruct_0 <- construct_fd_from_scores(pca_fd_obj = pca_fd,
+                                          scores_matrix = matrix(0, nrow = 1, ncol = 5),
+                                          K = 5)
+
+
+par(mfrow = c(2, 2))
+plot(pca_fd$meanfd, col = "blue")
+plot(reconstruct_0, col = "red")
+
+
+# Third Test: -------------------------------------------------------------
+# Same as above but we don't add back mean -- should get zero functions
+reconstruct_0_centered <- construct_fd_from_scores(
+  pca_fd_obj = pca_fd,
+  scores_matrix = matrix(0, nrow = 1, ncol = 5),
+  K = 5,
+  add_back_mean = FALSE)
+
+
+par(mfrow = c(1, 2))
+plot(reconstruct_0_centered, col = "red")
+# again, good.
+
+
+
+# Fourth test: -------------------------------------------------------------
+# Expect an erro if the dimensions of PCA and scores are don't match
+testthat::expect_error(
+  reconstruct_0_centered <- construct_fd_from_scores(
+    pca_fd_obj = pca_fd,
+    scores_matrix = matrix(rnorm(3), nrow = 1, ncol = 3),
+    K = 5)
+)
+# and now if K agrees with scores rather than pca_fd
+testthat::expect_error(
+  reconstruct_0_centered <- construct_fd_from_scores(
+    pca_fd_obj = pca_fd,
+    scores_matrix = matrix(rnorm(3), nrow = 1, ncol = 3),
+    K = 3)
+)
+
+
+

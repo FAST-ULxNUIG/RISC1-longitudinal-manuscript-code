@@ -36,7 +36,7 @@ decenter_fd_around_new_mean <- function(fdobj, mean.fd.obj)
   } else {
     nvar <- coefd[3]
     for (j in 1:nvar) {
-      coef[,,j] <- sweep(coef[,,j],1, coefmean[,1,j], FUN = "+")
+      coef[,,j] <- sweep(coef[,,j, drop = FALSE],1, coefmean[,1,j], FUN = "+") # drop = FALSE added to stop bug when only one observation.
     }
   }
   fdnames      <- fdobj$fdnames
