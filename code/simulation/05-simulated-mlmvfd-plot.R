@@ -9,8 +9,9 @@ source(here::here("code", "functions", "theme_gunning.R"))
 library(data.table) # CRAN v1.14.2
 library(fda)        # CRAN v5.5.1
 library(tikzDevice) # CRAN v0.12.3.1
-
 theme_gunning()
+
+
 # rough guide for sizing of plot outputs:
 doc_width_cm <- 16
 doc_width_inches <- doc_width_cm *  0.3937
@@ -43,7 +44,7 @@ pca_fd_test$scores <- pca_fd_test$scores[, seq_len(K_test),]
 pca_fd_test$varprop <- pca_fd_test$varprop[seq_len(K_test)]
 
 
-
+set.seed(1996)
 test_mvmlfd <- generate_mvmllfd(N = N_test, 
                                 pca_fd_obj = pca_fd_test,
                                 n_i = n_i_test, 
@@ -69,7 +70,7 @@ test_mvmlfd_dt[, id := paste(subject_id, side, stride_ind, sep = "_")]
 colnames(test_mvmlfd_mat) <- test_mvmlfd_dt$id
 
 
-                    # Create dataset for plotting: --------------------------------------------
+# Create dataset for plotting: --------------------------------------------
 plot_dt <- data.table(t_grid = rep(0:100, times = 3),
                       dimension = rep(c("Hip", "Knee", "Ankle"), each = 101),
                       test_mvmlfd_mat)
@@ -90,7 +91,9 @@ p <- ggplot(data = plot_dt_lng) +
                         label = paste(c(0, 0.25, 0.5, 0.75, 1))) +
   theme(legend.position = "bottom",
         legend.title = element_text(vjust = 0.8)) +
-  labs(x = "$t$", "y^{(p)}_{ijl}(t)$")
+  labs(x = "$t$", y = "$y^{(p)}_{ijl}(t)$")
+
+p
 
 tikz(file.path(plots_path, "simulated-mvmlfd.tex"),
      width = 1 * doc_width_inches, 
