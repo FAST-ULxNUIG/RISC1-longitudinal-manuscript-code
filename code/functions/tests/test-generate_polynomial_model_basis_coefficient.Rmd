@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, fig.height=10, fig.width=7.5}
+set.seed(2023)
 source(here::here("code", "functions", "add_poly_to_df.R"))
 source(here::here("code", "functions", "generate_design.R"))
 source(here::here("code", "functions", "generate_polynomial_model_basis_coefficient.R"))

@@ -41,6 +41,8 @@ covariates_dt_train <- basis_transformation_results$covariates_dt_train
 N_train <- basis_transformation_results$N_train
 
 
+
+
 # Set some parameters for the simulation: ---------------------------------
 k_sim <- 10 # Number of basis functions used in the simulation:
 grid_points <- 0:100

@@ -28,7 +28,7 @@ generate_basis_coefficient_matrix <- function(design_df,
     (length(beta_poly_3_vec) == K) & (length(beta_sex_vec) == K) &
     (length(beta_speed_cent_vec) == K)
   )) stop("All fixed-effects basis coefficients vectors must be of length K")
-  if(!(length(s_vec) == k)) stop("s_vec must be of length K")
+  if(!(length(s_vec) == K)) stop("s_vec must be of length K")
   
   if(!is.array(Q_star_array)) stop("Q_star_array must be an array")
   if(!all(dim(Q_star_array) == c(3, 3, K))) stop("Q_star_array must be of dimensions 3 x 3 x K")

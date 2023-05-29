@@ -8,13 +8,19 @@ generate_design_single_subject <- function(n_i, speed_sd) {
   df_subject <- data.frame(side = rep(c("left", "right"), each =  2 * n_i),
                            time = rep(t_grid, times = 2),
                            stride_ind = rep(seq_len(2 * n_i), times = 2))
+  
   df_subject <- df_subject[(df_subject$side == "left" & (df_subject$stride_ind %% 2 == 0)) |
                              (df_subject$side == "right" & (df_subject$stride_ind %% 2 != 0)), ]
   df_subject <- df_subject[order(df_subject$stride_ind), ]
   df_subject$side <- factor(df_subject$side, levels = c("left", "right"))
-  df_subject$speed_cent <- rnorm(n = 1, mean = 0, sd = speed_sd)
   df_subject$sex <- runif(n = 1, min = 0, max = 1)
-  df_subject$sex <- ifelse(df_subject$sex <= 0.5, "male", "female")
+  df_subject$sex <- ifelse(df_subject$sex >= 0.5, "male", "female")
+  # separate mean for males and females, grabbed roughly from real data.
+  if(unique(df_subject$sex) == "male") {
+    df_subject$speed_cent <- rnorm(n = 1, mean = 0.5, sd = speed_sd)
+  } else if(unique(df_subject$sex) == "female") {
+    df_subject$speed_cent <- rnorm(n = 1, mean = - 0.9, sd = speed_sd)
+  }
   df_subject
 }
 
