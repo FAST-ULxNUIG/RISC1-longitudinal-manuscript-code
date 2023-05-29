@@ -97,6 +97,6 @@ p
 
 tikz(file.path(plots_path, "simulated-mvmlfd.tex"),
      width = 1 * doc_width_inches, 
-     height = 0.8 * doc_width_inches)
+     height = 0.85 * doc_width_inches)
 print(p)
 dev.off()
