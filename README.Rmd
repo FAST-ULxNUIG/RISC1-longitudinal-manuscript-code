@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * :page_facing_up: [Construct an `fd` object by combining pca.fd object and matrix of PCA scores](code/functions/construct_fd_from_scores.R)
      * :page_facing_up: [Generate smooth Gaussian noise to add to simulated functional data](code/functions/function-generate-smooth-noise.R)
      * :page_facing_up: [Modified version of `pca.fd()` to choose $K$ based on proportion of variance explained.](code/functions/pca.fd_pve_cutoff.R)
-     * :page_facing_up: [Wrapper function to extract FPCA scores from a `pca.fd()` object and add them to a data frame.](code/functions/construct_fd_from_scores.R)
+     * :page_facing_up: [Wrapper function to extract FPCA scores from a `pca.fd()` object and add them to a data frame.](code/functions/add_pca.fd_scores_to_df.R)
      
     
     * :open_file_folder: **tests** -- some basic tests for the custom functions.

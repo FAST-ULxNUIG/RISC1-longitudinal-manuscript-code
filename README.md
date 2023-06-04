@@ -67,7 +67,7 @@ Repeatedly-Observed Human-Movement Data’
 
     - :page_facing_up: [Wrapper function to extract FPCA scores from a
       `pca.fd()` object and add them to a data
-      frame.](code/functions/construct_fd_from_scores.R)
+      frame.](code/functions/add_pca.fd_scores_to_df.R)
 
     - :open_file_folder: **tests** – some basic tests for the custom
       functions.
