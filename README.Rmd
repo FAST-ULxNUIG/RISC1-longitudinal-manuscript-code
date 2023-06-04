@@ -29,6 +29,11 @@ knitr::opts_chunk$set(echo = TRUE)
     * :page_facing_up: [Generate data from a polynomial scalar longitudinal model for the simulation](code/functions/generate_polynomial_model_basis_coefficient.R)
     * :page_facing_up: [Generate multiple basis coefficients (i.e., mv-FPC scores) from a polynomial scalar longitudinal model for the simulation](code/functions/generate-basis-coefficient-matrix.R)
     * :page_facing_up: [Construct an `fd` object by combining pca.fd object and matrix of PCA scores](code/functions/construct_fd_from_scores.R)
+     * :page_facing_up: [Generate smooth Gaussian noise to add to simulated functional data](code/functions/function-generate-smooth-noise.R)
+     * :page_facing_up: [Modified version of `pca.fd()` to choose $K$ based on proportion of variance explained.](code/functions/pca.fd_pve_cutoff.R)
+     * :page_facing_up: [Wrapper function to extract FPCA scores from a `pca.fd()` object and add them to a data frame.](code/functions/construct_fd_from_scores.R)
+     
+    
     * :open_file_folder: **tests** -- some basic tests for the custom functions.
       * :page_facing_up: [Test for `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
       * :page_facing_up: [Test for `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)

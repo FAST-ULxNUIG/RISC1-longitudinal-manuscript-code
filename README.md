@@ -23,32 +23,55 @@ Repeatedly-Observed Human-Movement Data’
     data analysis.
     - :page_facing_up: [Centering a (multivariate) object around a
       different mean](code/functions/center_fd_around_new_mean.R)
+
     - :page_facing_up: [Decentering a (multivariate) object around a
       different mean](code/functions/decenter_fd_around_new_mean.R)
+
     - :page_facing_up: [Helper functions for manipulating `fd`
       objects](code/functions/functions-helper-smoothing.R)
+
     - :page_facing_up: [Project (multivariate) functional data (`fd`
       object) onto (multivariate) FPCs (`pca.fd`
       object)](code/functions/project_data_onto_fpcs.R)  
+
     - :page_facing_up: [Computing the (%) of Variance Explained by a
       mv-FPCA
       reconstruction](code/functions/variance_explained_reconstruction.R)
+
     - :page_facing_up: [Custom theme for
       figures](code/functions/theme_gunning.R)
+
     - :page_facing_up: [Functions to generate data from a multilevel
       longitudinal design for the
       simulation](code/functions/generate_design.R)
+
     - :page_facing_up: [Generate data from a polynomial scalar
       longitudinal model for the
       simulation](code/functions/generate_polynomial_model_basis_coefficient.R)
+
     - :page_facing_up: [Generate multiple basis coefficients (i.e.,
       mv-FPC scores) from a polynomial scalar longitudinal model for the
       simulation](code/functions/generate-basis-coefficient-matrix.R)
+
     - :page_facing_up: [Construct an `fd` object by combining pca.fd
       object and matrix of PCA
       scores](code/functions/construct_fd_from_scores.R)
+
+    - :page_facing_up: [Generate smooth Gaussian noise to add to
+      simulated functional
+      data](code/functions/function-generate-smooth-noise.R)
+
+    - :page_facing_up: [Modified version of `pca.fd()` to choose $K$
+      based on proportion of variance
+      explained.](code/functions/pca.fd_pve_cutoff.R)
+
+    - :page_facing_up: [Wrapper function to extract FPCA scores from a
+      `pca.fd()` object and add them to a data
+      frame.](code/functions/construct_fd_from_scores.R)
+
     - :open_file_folder: **tests** – some basic tests for the custom
       functions.
+
       - :page_facing_up: [Test for
         `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
       - :page_facing_up: [Test for
