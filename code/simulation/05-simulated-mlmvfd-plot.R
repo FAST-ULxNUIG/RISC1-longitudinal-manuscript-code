@@ -5,6 +5,7 @@ source(here::here("code", "functions", "generate-basis-coefficient-matrix.R"))
 source(here::here("code", "functions", "generate-mvmllfd.R"))
 source(here::here("code", "functions", "construct_fd_from_scores.R"))
 source(here::here("code", "functions", "decenter_fd_around_new_mean.R"))
+source(here::here("code", "functions", "function-generate-smooth-noise.R"))
 source(here::here("code", "functions", "theme_gunning.R"))
 library(data.table) # CRAN v1.14.2
 library(fda)        # CRAN v5.5.1
@@ -60,6 +61,7 @@ test_mvmlfd <- generate_mvmllfd(N = N_test,
                                 s_vec = s_k_test
 )
 
+test_mvmlfd$fd_obj <- add_smooth_noise_to_fd_obj(fd_obj = test_mvmlfd$fd_obj, sigma = 0.9, l = 0.25)
 
 test_mvmlfd_array <- eval.fd(evalarg = 0:100, fdobj = test_mvmlfd$fd_obj)
 test_mvmlfd_mat <- rbind(test_mvmlfd_array[,,1],
