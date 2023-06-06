@@ -69,6 +69,29 @@ Repeatedly-Observed Human-Movement Data’
       `pca.fd()` object and add them to a data
       frame.](code/functions/add_pca.fd_scores_to_df.R)
 
+    - :page_facing_up: [Function to fit a polynomial scalar longitudinal
+      model the to FPC scores.](code/functions/fit_poly.R)
+
+    - :page_facing_up: [Function to fit a “naive” model the to FPC
+      scores.](code/functions/fit_naive.R)
+
+    - :page_facing_up: [Function to calculate integrated squared
+      prediction error for functional
+      observations.](code/functions/calculate_prediction_error.R)
+
+    - :page_facing_up: [Convenience function to split data into train
+      and test in simulation.](code/functions/split_train_test.R)
+
+    - :page_facing_up: [Convenience function to load all functions
+      needed in the
+      simulation.](code/functions/source_all_simulation_functions.R)
+
+    - :page_facing_up: [Convenience function to add polynomial terms to
+      a data frame.](code/functions/add_poly_to_df.R)
+
+    - :page_facing_up: [Convenience function to add natural spline terms
+      to a data frame.](code/functions/add_natural_splines_to_df.R)
+
     - :open_file_folder: **tests** – some basic tests for the custom
       functions.
 
