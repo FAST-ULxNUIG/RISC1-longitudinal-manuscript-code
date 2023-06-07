@@ -92,6 +92,10 @@ Repeatedly-Observed Human-Movement Data’
     - :page_facing_up: [Convenience function to add natural spline terms
       to a data frame.](code/functions/add_natural_splines_to_df.R)
 
+    - :page_facing_up: [Function to extract fixed-effects coefficients
+      from a list of fitted `lmerMod`
+      objects.](code/functions/extract_fixef_coef.R)
+
     - :open_file_folder: **tests** – some basic tests for the custom
       functions.
 

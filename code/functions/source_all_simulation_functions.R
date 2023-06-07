@@ -15,4 +15,5 @@ source(here::here("code", "functions", "fit_poly.R"))
 source(here::here("code", "functions", "fit_naive.R"))
 source(here::here("code", "functions", "split_train_test.R"))
 source(here::here("code", "functions", "calculate_prediction_error.R"))
+source(here::here("code", "functions", "extract_fixef_coef.R"))
 
