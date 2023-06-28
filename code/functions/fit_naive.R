@@ -84,7 +84,23 @@ predict_fd_naive <- function(fit_naive_object, newdata, pca_fd_obj) {
     K = K_retain)
 }
 
-
+extract_intercept_fd_naive <- function(fit_naive_object, pca_fd_obj) {
+  # Extracts multivariate intercept function at a grid of 101 equally-spaced points
+  # on the longitudinal domain [0,1].
+  poly_basis <- fit_naive_object$poly_basis
+  poly_design_matrix <- cbind(1, poly_basis)
+  poly_basis_coefficients <- extract_fixef_coef(lme_list_object = fit_naive_object$lme_fit_list,
+                                                K_retain = fit_naive_object$K_retain)
+  poly_basis_coefficients <- poly_basis_coefficients[c("(Intercept)", paste0("poly_", seq_len(ncol(poly_basis)))), ]
+  stopifnot(ncol(poly_design_matrix) == nrow(poly_basis_coefficients))
+  poly_scores <- poly_design_matrix %*% poly_basis_coefficients
+  
+  intercept_on_longitudinal_grid <- construct_fd_from_scores(pca_fd_obj = pca_fd_obj,
+                                                             scores_matrix = poly_scores,
+                                                             K = fit_naive_object$K_retain, 
+                                                             add_back_mean = TRUE)
+  intercept_on_longitudinal_grid
+}
 
 
 

@@ -9,7 +9,8 @@ fit_poly <- function(df_scores,
                                                          xtol_abs=1e-10,
                                                          ftol_rel=0, 
                                                          ftol_abs=1e-10)),
-                     REML = TRUE) {
+                     REML = TRUE,
+                     diagonal_covariance = FALSE) {
   # Step 0 - some routine checks before we start:
   if(!(is.data.frame(df_scores))) stop("df_scores must be a data frame.")
   if(!all(paste0("score_", seq_len(K_retain)) %in% names(df_scores))) {
@@ -26,7 +27,11 @@ fit_poly <- function(df_scores,
   
   # Step 2 - Set up formula for model fitting:
   poly_formula <- paste(poly_seq, collapse = " + ")
-  ranef_formula <- paste0("(", poly_formula, " | subject_id/side)")
+  if(!diagonal_covariance) {
+    ranef_formula <- paste0("(", poly_formula, " | subject_id/side)")
+  } else if(diagonal_covariance) {
+    ranef_formula <- paste0("(", poly_formula, " || subject_id/side)")
+  }
   rhs_formula <- paste(poly_formula, fixef_formula, ranef_formula, sep = " + ")
   
   # Step 3 - Fit series of scalar longitudinal models:
@@ -84,5 +89,32 @@ predict_fd_poly <- function(fit_poly_object, newdata, pca_fd_obj) {
     scores_matrix = scores_predictions_matrix,
     K = K_retain)
 }
+
+
+
+extract_intercept_fd_poly <- function(fit_poly_object, pca_fd_obj) {
+  # Extracts multivariate intercept function at a grid of 101 equally-spaced points
+  # on the longitudinal domain [0,1].
+  poly_basis <- fit_poly_object$poly_basis
+  poly_design_matrix <- cbind(1, poly_basis)
+  poly_basis_coefficients <- extract_fixef_coef(lme_list_object = fit_poly_object$lme_fit_list,
+                                                K_retain = fit_poly_object$K_retain)
+  poly_basis_coefficients <- poly_basis_coefficients[c("(Intercept)", paste0("poly_", seq_len(ncol(poly_basis)))), ]
+  stopifnot(ncol(poly_design_matrix) == nrow(poly_basis_coefficients))
+  poly_scores <- poly_design_matrix %*% poly_basis_coefficients
+  
+  intercept_on_longitudinal_grid <- construct_fd_from_scores(pca_fd_obj = pca_fd_obj,
+                                                             scores_matrix = poly_scores,
+                                                             K = fit_poly_object$K_retain, 
+                                                             add_back_mean = TRUE)
+  intercept_on_longitudinal_grid
+}
+
+
+
+
+
+
+
 
 
