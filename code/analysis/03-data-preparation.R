@@ -36,6 +36,9 @@ bspl80 <- fda::create.bspline.basis(
   nbasis = 80,
   norder = 4)
 
+
+
+
 # Create subset of the data set to work with ------------------------------
 # We are working with sagittal plane (i.e., flexion) kinematics
 risc1_basis_coef_subset <- risc1_basis_coef[
@@ -46,6 +49,7 @@ risc1_basis_coef_subset <- risc1_basis_coef[
 
 # How many different subjects?
 risc1_basis_coef_subset[, uniqueN(subject_id)]
+risc1_basis_coef_subset[subject_id == "P_4019"]
 # [1] 288
 
 # Remove subjects who have very sparse measurements at longitudinal level
@@ -53,6 +57,8 @@ risc1_basis_coef_subset[, uniqueN(subject_id)]
 risc1_basis_coef_subset[,.(unique_strides = uniqueN(stride_num)),
                         by = .(subject_id, side)][, hist(unique_strides)]
 
+risc1_basis_coef_subset[subject_id == "P_4019", .(unique_strides = uniqueN(stride_num)),
+                        by = .(subject_id, side)]
 
 (subject_ids_remove <- risc1_basis_coef_subset[,.(unique_strides = uniqueN(stride_num)),
                          by = .(subject_id, side)][unique_strides < 20, unique(subject_id)])
@@ -62,8 +68,16 @@ risc1_basis_coef_subset[,.(unique_strides = uniqueN(stride_num)),
                         by = .(subject_id, side)][rev(order(unique_strides))]
 
 risc1_basis_coef_subset <- risc1_basis_coef_subset[!(subject_id %in% subject_ids_remove)]
-
 # 284
+
+run_duration_dt <- fread("/Users/edwardgunning/Dropbox/Eddie Gunning/thesis-chapt-3/outputs/data/run_duration.csv")
+fwrite(run_duration_dt, file = file.path(outputs_path, "run_duration_dt.csv"))
+
+unique_strides_dt <- risc1_basis_coef_subset[, .(unique_strides = uniqueN(stride_num)), by = .(subject_id, side)]
+fwrite(unique_strides_dt, file.path(outputs_path, "unique_strides_dt.csv"))
+
+
+
 
 # Calculate the test proportion
 risc1_basis_coef_subset[,.(test = 10 / uniqueN(stride_num)),

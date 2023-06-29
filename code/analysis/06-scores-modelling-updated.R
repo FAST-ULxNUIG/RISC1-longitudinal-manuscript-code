@@ -224,10 +224,10 @@ sample_plot_dt_03[, side := factor(side,
     scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = paste(c(0, 0.25, 0.5, 0.75, 1))) +
     xlab("Longitudinal Time ($T$)") +
     ylab("mv-FPC1 Score ($y_{ijl, 1}^*$)") +
-    theme(legend.position = "bottom")) +
+    theme(legend.position = "bottom") +
   geom_line(aes(y = pred_score_1, linetype = "ml-FPCA")) +
   geom_line(aes(y = pred_score_1, linetype = "Polynomial"), data = sample_plot_dt_02) +
-  scale_linetype_discrete(name = NULL)
+  scale_linetype_discrete(name = NULL))
   
 
 tikz(file.path(plots_path, "fitted-mv-FPC1-plot.tex"),
@@ -238,3 +238,9 @@ print(p3)
 dev.off()
 
 tinytex::lualatex(file.path(plots_path, "fitted-mv-FPC1-plot.tex"))
+
+
+
+
+
+
