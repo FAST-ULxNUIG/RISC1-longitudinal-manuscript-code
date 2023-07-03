@@ -61,7 +61,7 @@ table1 <- stringr::str_replace(table1,
                                pattern = "& N & Pct.\\\\\\\\\n",
                                replacement = "& N & Pct.\\\\\\\\\n\\\\midrule\n")
 table1 <- stringr::str_replace(table1, pattern = "N & Pct.", 
-                               replacement = "\\\\textbf{N} & $\\\\mathbf{\\\\pmb{(\\\\%)}}$")
+                               replacement = "\\\\textbf{N} & $\\\\mathbf{\\\\mathbf{(\\\\%)}}$")
 table1 <- stringr::str_replace(table1, pattern = "Mean & Std. Dev.", 
                                replacement = "\\\\textbf{Mean} & \\\\textbf{Std. Dev.}")
 table1 <- stringr::str_replace(table1, pattern = "\\\\end\\{tabular\\}\n\\\\end\\{table\\}",
