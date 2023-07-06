@@ -1,4 +1,8 @@
 fixInNamespace("face.Cov.mfpca", "refund")
+# have to manually go to line 109 and change Phi[, 1:N] to Phi[, 1:N, drop = FALSE]
+# this is based on a bug I found and reported in mfpca.face()
+# see: https://github.com/refunders/refund/pull/106
+# for now, have to change manually on start-up until new version of refund added.
 require(refund)
 fit_fpca_single_score <- function(df_scores,
                                   score_ind = 1, 
@@ -137,7 +141,7 @@ fit_fpca <- function(df_scores,
 
 predict_scores_fpca <- function(fit_fpca_object, newdata, pca_fd_obj) {
   
-  # Extract K from spline fit object:
+  # Extract K from fpca fit object:
   # Step 1 -- Unpack objects
   spline_basis <- fit_fpca_object$spline_basis
   lme_fit_list <- fit_fpca_object$lme_fit_list

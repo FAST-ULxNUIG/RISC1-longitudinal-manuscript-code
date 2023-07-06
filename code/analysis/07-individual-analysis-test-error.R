@@ -65,9 +65,10 @@ individual_test_pe_fpca <- calculate_individual_prediction_errors(
   pred_fd_obj = predicted_fd_obj_fpca, true_fd_obj = mfd_obj_test)
 
 ## Naive Model: -----------------------------------------------------------
-predicted_fd_obj_naive <- predict_fd_naive(fit_naive_object  = naive_model,
+predicted_fd_obj_naive <- predict_fd_naive_spline_intercept(fit_naive_spline_intercept_object = naive_model,
                                            newdata = covariates_dt_test,
                                            pca_fd_obj = mfpca)
+
 calculate_prediction_error(pred_fd_obj = predicted_fd_obj_naive, 
                            true_fd_obj = mfd_obj_test)
 individual_test_pe_naive <- calculate_individual_prediction_errors(
@@ -93,6 +94,11 @@ individual_pe_dt[, `:=`(
 individual_pe_dt[,  `:=`(
   pe_spline_ri_ratio = pe_spline_ri / pe_naive,
   pe_fpca_ratio = pe_fpca / pe_naive)]
+
+individual_pe_dt[, median(pe_spline_ri_ratio)]
+individual_pe_dt[, mean(pe_spline_ri_ratio)]
+# Both at 0.93
+
 
 individual_pe_dt_lng <- melt.data.table(individual_pe_dt[, .(subject_id, stride_num, side, pe_fpca_ratio, pe_spline_ri_ratio)],
                                         id.vars = c("subject_id", "stride_num", "side"), verbose = TRUE,
@@ -128,6 +134,8 @@ individual_pe_dt_subject <- individual_pe_dt[, .(pe_spline_ri = mean(pe_spline_r
 individual_pe_dt_subject[,  `:=`(
   pe_spline_ri_ratio = pe_spline_ri / pe_naive,
   pe_fpca_ratio = pe_fpca / pe_naive)]
+
+individual_pe_dt_subject[, mean(pe_spline_ri_ratio)]
 
 individual_pe_dt_subject_lng <- melt.data.table(individual_pe_dt_subject[, .(subject_id, pe_fpca_ratio, pe_spline_ri_ratio)],
                                         id.vars = c("subject_id"), verbose = TRUE,
