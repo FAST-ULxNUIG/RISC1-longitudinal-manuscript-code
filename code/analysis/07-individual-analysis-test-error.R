@@ -7,7 +7,7 @@ library(ggplot2)    # CRAN v3.4.0
 library(tikzDevice) # CRAN v0.12.3.1
 library(splines)
 library(data.table) # CRAN v1.14.2 
-library(ggpubr)
+library(ggpubr)     # CRAN v0.4.0
 
 # Load all helper functions: ----------------------------------------------
 source(here::here("code", "functions", "source_all_analysis_functions.R"))
@@ -17,7 +17,10 @@ source(here::here("code", "functions", "source_all_analysis_functions.R"))
 theme_gunning()
 plots_path <- here::here("outputs", "figures")
 theme_gunning() # use default theme
-theme_update(plot.subtitle = element_text(hjust = 0.5, size = 9, face = "italic"))
+theme_update()
+theme_update(
+  plot.subtitle = element_text(hjust = 0.5, size = 9, face = "italic"),
+  axis.text = element_text(size = 9))
 # rough guide for sizing of plot outputs:
 doc_width_cm <- 16
 doc_width_inches <- doc_width_cm *  0.3937
@@ -79,7 +82,7 @@ boxplot(individual_test_pe_spline_ri / individual_test_pe_naive,
         individual_test_pe_fpca / individual_test_pe_naive)
 
 
-# Create Publishable Boxplot: ---------------------------------------------
+                    # Create Publishable Boxplot: ---------------------------------------------
 ## By Individual Stride: ---------------------------------------------------
 individual_pe_dt <- copy(covariates_dt_test)
 individual_pe_dt[, `:=`(
@@ -103,16 +106,18 @@ individual_pe_dt_lng[, method := factor(method,
                                         levels = c("pe_spline_ri_ratio", "pe_fpca_ratio"),
                                         c("Spline Model", "ml-FPCA model"))]
 
+theme_update(axis.title.x = element_blank())
+
 p1 <- ggplot(data = individual_pe_dt_lng) +
-  aes(y = pe_ratio, x = method, colour = method) +
+  aes(y = pe_ratio, x = method, fill = method) +
   geom_hline(yintercept = c(0.95,1), lty = c(2, 1), col = c("darkgrey", 1)) +
-  geom_boxplot(outlier.size = 0.5) +
+  geom_boxplot(outlier.size = 0.5, alpha = 0.5) +
   labs(y = "ISPE$_{method}$ / ISPE$_{naive}$", 
        title = "(a) Test-Set Prediction Error",
        subtitle = "Individual Strides",
        x = "Method") +
   theme(legend.position = "none") +
-  scale_color_manual(values = c("#CC79A7", "#009E73")) 
+  scale_fill_manual(values = c("#CC79A7", "#009E73")) 
 
 
 ## by Subject -------------------------------------------------------------
@@ -137,16 +142,16 @@ individual_pe_dt_subject_lng[, method := factor(method,
                                         c("Spline Model", "ml-FPCA model"))]
 
 
-p2 <- ggplot(data = individual_pe_dt_subject_lng) +
-  aes(y = pe_ratio, x = method, colour = method) +
+(p2 <- ggplot(data = individual_pe_dt_subject_lng) +
+  aes(y = pe_ratio, x = method, fill = method) +
   geom_hline(yintercept = c(0.95,1), lty = c(2, 1), col = c("darkgrey", 1)) +
-  geom_boxplot(outlier.size = 0.5) +
+  geom_boxplot(outlier.size = 0.5, alpha = 0.5) +
   labs(y = "Av(ISPE$_{method}$) / Av(ISPE$_{naive}$)", 
        title = "(b) Test-Set Prediction Error",
        subtitle = "Subject Averages",
        x = "Method")  +
   theme(legend.position = "none") +
-  scale_color_manual(values = c("#CC79A7", "#009E73")) 
+  scale_fill_manual(values = c("#CC79A7", "#009E73")))
 
 
 
