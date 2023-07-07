@@ -16,8 +16,6 @@ source(here::here("code", "functions", "source_all_analysis_functions.R"))
 # Set graphics settings; --------------------------------------------------
 theme_gunning()
 plots_path <- here::here("outputs", "figures")
-theme_gunning() # use default theme
-theme_update()
 theme_update(
   plot.subtitle = element_text(hjust = 0.5, size = 9, face = "italic"),
   axis.text = element_text(size = 9))
