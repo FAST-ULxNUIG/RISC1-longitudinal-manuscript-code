@@ -1,11 +1,12 @@
 library(data.table) # CRAN v1.14.2
 library(ggplot2)    # CRAN v3.4.2
-library(tikzDevice)
+library(tikzDevice) # CRAN v0.12.3.1
 
 plots_path <- here::here("outputs", "figures")
 outputs_path <- here::here("outputs")
 parameter_results_dt <- readRDS(file.path(outputs_path, "parameter_results_dt"))
 source(here::here("code/functions/theme_gunning.R"))
+source("code/functions/fit_spline_subject_ri_side.R")
 theme_gunning()
 # rough guide for sizing of plot outputs:
 doc_width_cm <- 16
@@ -70,4 +71,6 @@ print(p)
 dev.off()
 
 tinytex::lualatex(file.path(plots_path, "spline-coef-plot.tex"))
+
+
 
