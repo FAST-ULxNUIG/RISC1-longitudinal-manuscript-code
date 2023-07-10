@@ -7,7 +7,6 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ## Repository Structure:  
 
 --- 
@@ -39,7 +38,7 @@ knitr::opts_chunk$set(echo = TRUE)
      * :page_facing_up: [Function to fit a "naive" model the to mv-FPC scores.](code/functions/fit_naive_spline_intercept.R)
      * :page_facing_up: [Function to fit a ml-FPCA model the to mv-FPC scores.](code/functions/fit_fpca.R)
      * :page_facing_up: [Function to fit a natural spline model the to mv-FPC scores.](code/functions/fit_spline.R)
-     * :page_facing_up: [Reduced version of the above model.](code/functionfit_spline_subject_ri_side.R)
+     * :page_facing_up: [Reduced version of the above model.](code/functions/fit_spline_subject_ri_side.R)
      * :page_facing_up: [Function to calculate average integrated squared prediction error for functional observations.](code/functions/calculate_prediction_error.R)
      * :page_facing_up: [Function to calculate individual integrated squared prediction errors for functional observations.](code/functions/calculate_individual_prediction_errors.R)
      * :page_facing_up: [Convenience function to split data into train and test in simulation.](code/functions/split_train_test.R)

@@ -77,7 +77,7 @@ Repeatedly-Observed Human-Movement Data’
     - :page_facing_up: [Function to fit a natural spline model the to
       mv-FPC scores.](code/functions/fit_spline.R)
     - :page_facing_up: [Reduced version of the above
-      model.](code/functionfit_spline_subject_ri_side.R)
+      model.](code/functions/fit_spline_subject_ri_side.R)
     - :page_facing_up: [Function to calculate average integrated squared
       prediction error for functional
       observations.](code/functions/calculate_prediction_error.R)
