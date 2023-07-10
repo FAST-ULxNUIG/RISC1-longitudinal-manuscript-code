@@ -15,9 +15,12 @@ knitr::opts_chunk$set(echo = TRUE)
   * :open_file_folder: **analysis** -- scripts used to perform the data analysis.
     * :page_facing_up: [01 - Create Plot for Introduction](code/analysis/01-introduction-plot.R)
     * :page_facing_up: [02 - Create Plot of Stride Timings](code/analysis/02-strides-timing-plot.R)
-    * :page_facing_up: [03 - Prepare Data for Analysis](code/analysis/03-data-preparation.R)
+    * :page_facing_up: [03 - Prepare Data for Analysis](code/analysis/03-data-preparation.R) ([extra figures](code/analysis/03-data-preparation-extra-plot.R))
     * :page_facing_up: [04 - Split Data into Test and Training Samples](code/analysis/04-test-train-split.R)
     * :page_facing_up: [05 - mv-FPCA basis Representation](code/analysis/05-basis-representation.R)
+    * :page_facing_up: [06 - Linear Mixed Models of mv-FPCA Scores](code/analysis/06-scores-modelling.R) ([extra figures](code/analysis/06))
+    * :page_facing_up: 07 - Individual Random Effects Analysis ([Script 1](code/analysis/07-individual-fitted-mv-FPC1.R), [Script 2](code/analysis/07-individual-analysis-predictions.R), [Script 3](code/analysis/07-individual-analysis-test-error.R), [Script 4](code/analysis/07-individual-analysis-changes.R))
+    * :page_facing_up: 08 - Fixed Effects Analysis ([Script 1](code/analysis/08-fixef-results-post-processing.R), [Script 2](code/analysis/08-fixef-spline-coef.R))
   * :open_file_folder: **functions** -- custom functions for modelling data analysis.
     * :page_facing_up: [Centering a (multivariate) object around a different mean](code/functions/center_fd_around_new_mean.R)
     * :page_facing_up: [Decentering a (multivariate) object around a different mean](code/functions/decenter_fd_around_new_mean.R)

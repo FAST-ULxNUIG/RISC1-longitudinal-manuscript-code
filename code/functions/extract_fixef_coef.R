@@ -29,10 +29,14 @@ compute_fixef_functions <- function(fit_object, pca_fd_obj, vars = NULL) {
   }
   
   # Use to predict functional data object:
-  construct_fd_from_scores(
+  fd_return <- construct_fd_from_scores(
     pca_fd_obj = pca_fd_obj,
     scores_matrix = fixef_coef_matrix,
     K = K_retain, 
     add_back_mean = FALSE)
+  
+  # add names of variables:
+  fd_return$fdnames$reps <- rownames(fixef_coef_matrix)
+  fd_return
 }
 

@@ -86,6 +86,7 @@ risc1_basis_coef_subset[,.(test = 10 / uniqueN(stride_num)),
                         by = .(subject_id, side)][, range(test)]
 
 
+
 subset_coef_hip <- risc1_basis_coef_subset[location == "Hip"]
 subset_coef_knee <- risc1_basis_coef_subset[location == "Knee"]
 subset_coef_ankle <- risc1_basis_coef_subset[location == "Ankle"]

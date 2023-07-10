@@ -125,7 +125,7 @@ p2 <- ggplot(data = P_4237_predicted_eval_dt_lng) +
        colour = "Stride Number:") +
   guides(colour = guide_legend(override.aes = list(linewidth = 1)))
 
-combined_plot <- ggarrange(p1, p2, nrow = 2, common.legend = TRUE, legend = "top") 
+combined_plot <- ggarrange(p1, p2, nrow = 2, common.legend = TRUE, legend = "bottom") 
 
 tikz(file.path(plots_path, "p4237-plot.tex"),
      width = (1) * doc_width_inches, 
