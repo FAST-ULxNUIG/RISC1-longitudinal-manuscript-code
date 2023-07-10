@@ -35,98 +35,95 @@ Repeatedly-Observed Human-Movement Data’
     data analysis.
     - :page_facing_up: [Centering a (multivariate) object around a
       different mean](code/functions/center_fd_around_new_mean.R)
-
     - :page_facing_up: [Decentering a (multivariate) object around a
       different mean](code/functions/decenter_fd_around_new_mean.R)
-
     - :page_facing_up: [Helper functions for manipulating `fd`
       objects](code/functions/functions-helper-smoothing.R)
-
     - :page_facing_up: [Project (multivariate) functional data (`fd`
       object) onto (multivariate) FPCs (`pca.fd`
       object)](code/functions/project_data_onto_fpcs.R)  
-
     - :page_facing_up: [Computing the (%) of Variance Explained by a
       mv-FPCA
       reconstruction](code/functions/variance_explained_reconstruction.R)
-
     - :page_facing_up: [Custom theme for
       figures](code/functions/theme_gunning.R)
-
     - :page_facing_up: [Functions to generate data from a multilevel
       longitudinal design for the
       simulation](code/functions/generate_design.R)
-
     - :page_facing_up: [Generate data from a polynomial scalar
       longitudinal model for the
       simulation](code/functions/generate_polynomial_model_basis_coefficient.R)
-
     - :page_facing_up: [Generate multiple basis coefficients (i.e.,
       mv-FPC scores) from a polynomial scalar longitudinal model for the
       simulation](code/functions/generate-basis-coefficient-matrix.R)
-
     - :page_facing_up: [Construct an `fd` object by combining pca.fd
       object and matrix of PCA
       scores](code/functions/construct_fd_from_scores.R)
-
     - :page_facing_up: [Generate smooth Gaussian noise to add to
       simulated functional
       data](code/functions/function-generate-smooth-noise.R)
-
     - :page_facing_up: [Modified version of `pca.fd()` to choose $K$
       based on proportion of variance
       explained.](code/functions/pca.fd_pve_cutoff.R)
-
     - :page_facing_up: [Wrapper function to extract FPCA scores from a
       `pca.fd()` object and add them to a data
       frame.](code/functions/add_pca.fd_scores_to_df.R)
-
     - :page_facing_up: [Function to fit a polynomial scalar longitudinal
-      model the to FPC scores.](code/functions/fit_poly.R)
-
-    - :page_facing_up: [Function to fit a “naive” model the to FPC
-      scores.](code/functions/fit_naive.R)
-
-    - :page_facing_up: [Function to calculate integrated squared
+      model the to mv-FPC scores.](code/functions/fit_poly.R)
+    - :page_facing_up: [Function to fit a “naive” model the to mv-FPC
+      scores.](code/functions/fit_naive_spline_intercept.R)
+    - :page_facing_up: [Function to fit a ml-FPCA model the to mv-FPC
+      scores.](code/functions/fit_fpca.R)
+    - :page_facing_up: [Function to fit a natural spline model the to
+      mv-FPC scores.](code/functions/fit_spline.R)
+    - :page_facing_up: [Reduced version of the above
+      model.](code/functionfit_spline_subject_ri_side.R)
+    - :page_facing_up: [Function to calculate average integrated squared
       prediction error for functional
       observations.](code/functions/calculate_prediction_error.R)
-
+    - :page_facing_up: [Function to calculate individual integrated
+      squared prediction errors for functional
+      observations.](code/functions/calculate_individual_prediction_errors.R)
     - :page_facing_up: [Convenience function to split data into train
       and test in simulation.](code/functions/split_train_test.R)
-
     - :page_facing_up: [Convenience function to load all functions
       needed in the
       simulation.](code/functions/source_all_simulation_functions.R)
-
     - :page_facing_up: [Convenience function to add polynomial terms to
       a data frame.](code/functions/add_poly_to_df.R)
-
     - :page_facing_up: [Convenience function to add natural spline terms
       to a data frame.](code/functions/add_natural_splines_to_df.R)
-
     - :page_facing_up: [Function to extract fixed-effects coefficients
       from a list of fitted `lmerMod`
       objects.](code/functions/extract_fixef_coef.R)
-
-    - :open_file_folder: **tests** – some basic tests for the custom
-      functions.
-
-      - :page_facing_up: [Test for
-        `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
-      - :page_facing_up: [Test for
-        `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
-      - :page_facing_up: [Test for
-        `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
-      - :page_facing_up: [Test for
-        `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
-      - :page_facing_up: [Test for
-        `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
-      - :page_facing_up: [Test 1 for
-        `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
-      - :page_facing_up: [Test 2 for
-        `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-02.R)
-      - :page_facing_up: [Test for
-        `construct_fd_from_scores()`](code/functions/tests/test_construct_fd_from_scores.R)
+    - :page_facing_up: [Conveninence function to load all functions for
+      data analysis.](code/functions/source_all_analysis_functions.R)
+    - :page_facing_up: [Conveninence functions for post processing
+      results.](code/functions/post-processing-functions.R)
+    - :page_facing_up: [Function to calculate rate of change in
+      longitudinal direction](code/functions/calculate_rate_of_change.R)
+  - :open_file_folder: **tests** – some basic tests for the custom
+    functions.
+    - :page_facing_up: [Test for
+      `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
+    - :page_facing_up: [Test for
+      `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
+    - :page_facing_up: [Test for
+      `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
+    - :page_facing_up: [Test for
+      `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
+    - :page_facing_up: [Test for
+      `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
+    - :page_facing_up: [Test 1 for
+      `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
+    - :page_facing_up: [Test 2 for
+      `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-02.R)
+    - :page_facing_up: [Test for
+      `construct_fd_from_scores()`](code/functions/tests/test_construct_fd_from_scores.R)
+    - :page_facing_up: [Tests for
+      `calculate_rate_of_change()`](code/functions/tests/test_calculate_rate_of_change.R)
+    - :page_facing_up: [Tests for
+      `calculate_individual_prediction_errors()`](code/functions/tests/test_calculate_individual_prediction_errors.R)
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been

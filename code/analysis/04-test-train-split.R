@@ -10,7 +10,7 @@ library(fda)          # CRAN v5.5.1
 library(stringr)      # CRAN v1.4.0
 library(modelsummary) # CRAN v1.4.1
 
-# -------------------------------------------------------------------------
+# Read in data: -----------------------------------------------------------
 outputs_path <- here::here("outputs")
 data_objects_list <- readRDS(file = file.path(outputs_path, "data-objects.rds"))
 source(file = here::here(
@@ -18,22 +18,21 @@ source(file = here::here(
   "functions",
   "functions-helper-smoothing.R"
 ))
-
 # unpack:
 mfd_obj <- data_objects_list$mfd_obj
 subset_coef_hip <- data_objects_list$subset_coef_hip
 
 
-# -------------------------------------------------------------------------
 
+# Define basis: -----------------------------------------------------------
 bspl80 <- fda::create.bspline.basis(
   rangeval = c(0, 100),
   nbasis = 80,
   norder = 4)
 
-
-
-                      # Create table 1 of characteristics: -------------------------------------
+# Create Table 1 of characteristics: -------------------------------------
+# (lots of manual formatting here to get it the way we need...)
+# results in ugly code with lots of escaping!
 subset_info_dt <- subset_coef_hip
 table1_dt <- subset_info_dt[, .(
   ris = retrospective_injury_status[1],
@@ -70,7 +69,8 @@ writeLines(text = table1, con = file.path(outputs_path, "tables", "table_1.tex")
 
 
 
-# Scale variables: --------------------------------------------------------
+
+# Centre variables: -------------------------------------------------------
 subset_info_dt[, `:=`(
   height_cm_cent = scale(height_cm, center = TRUE, scale = FALSE),
   weight_kg_cent = scale(weight_kg, center = TRUE, scale = FALSE),
