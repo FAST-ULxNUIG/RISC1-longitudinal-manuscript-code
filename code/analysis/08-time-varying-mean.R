@@ -12,7 +12,6 @@ source("code/functions/construct_fd_from_scores.R")
 source("code/functions/center_fd_around_new_mean.R")
 source("code/functions/decenter_fd_around_new_mean.R")
 
-
 # Load Results: -----------------------------------------------------------
 basis_transformation_results <- readRDS(
   here::here("outputs","basis-transformation-results.rds"))
@@ -29,6 +28,14 @@ plots_path <- file.path(outputs_path, "figures")
 doc_width_cm <- 16
 doc_width_inches <- doc_width_cm *  0.3937
 theme_gunning()
+theme_update(
+  axis.text = element_text(size = 10.5),
+  axis.title = element_text(size = 10.5),
+  strip.text = element_text(size = 10.5),
+  plot.title = element_text(size = 11.5),
+  legend.text = element_text(size = 10.5),
+  legend.title = element_text(size = 11)
+)
 
 # Extract Objects from Results: -------------------------------------------
 # From basis transformation results:
@@ -61,6 +68,7 @@ intercept_eval_on_grid_dt_lng <- melt.data.table(intercept_eval_on_grid_dt,
                                                  variable.factor = FALSE, 
                                                  value.factor = FALSE)
 intercept_eval_on_grid_dt_lng[, long_time := as.numeric(long_time)]
+intercept_eval_on_grid_dt_lng[, dimension := factor(dimension, levels = c("Hip", "Knee", "Ankle"))]
 
 p1 <- ggplot(data = intercept_eval_on_grid_dt_lng[long_time %in% seq(0, 1, by = 0.05)]) +
   aes(x = t, y = angle, group = long_time, colour = long_time) +
@@ -68,8 +76,8 @@ p1 <- ggplot(data = intercept_eval_on_grid_dt_lng[long_time %in% seq(0, 1, by = 
   geom_line(linewidth = 0.4) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
        y = "Angle ($^{\\circ}$)",
-       colour = "Longitudinal Time:",
-       title = "Intercept Function") +
+       colour = "Longitudinal Time ($T$):",
+       title = "(a) Intercept Function") +
   theme(legend.position = "bottom",
         legend.title = element_text(vjust = 0.75)) +
   scale_color_gradientn(colours = rainbow(10),
@@ -102,6 +110,7 @@ intercept_eval_on_grid_centered_dt_lng <- melt.data.table(intercept_eval_on_grid
                                                  variable.factor = FALSE, 
                                                  value.factor = FALSE)
 intercept_eval_on_grid_centered_dt_lng[, long_time := as.numeric(long_time)]
+intercept_eval_on_grid_centered_dt_lng[, dimension := factor(dimension, levels = c("Hip", "Knee", "Ankle"))]
 
 p2 <- ggplot(data = intercept_eval_on_grid_centered_dt_lng[long_time %in% seq(0, 1, by = 0.05)]) +
   aes(x = t, y = angle, group = long_time, colour = long_time) +
@@ -109,8 +118,8 @@ p2 <- ggplot(data = intercept_eval_on_grid_centered_dt_lng[long_time %in% seq(0,
   geom_line() +
   labs(x = "Normalised Time ($\\%$ of Stride)",
        y = "Angle ($^{\\circ}$)",
-       colour = "Longitudinal Time:",
-       title = "Intercept Function (Centred around Overall Mean)") +
+       colour = "Longitudinal Time ($T$):",
+       title = "(b) Intercept Function (Centred around Overall Mean)") +
   theme(legend.position = "bottom",
         legend.title = element_text(vjust = 0.75)) +
   scale_color_gradientn(colours = rainbow(10),
@@ -121,8 +130,6 @@ p2
 
 
 (p <- ggarrange(p1, p2, nrow = 2, common.legend = TRUE, legend = "bottom"))
-
-
 
 tikz(file.path(plots_path, "time-varying-mean.tex"),
      width = (4/3) * doc_width_inches, 
