@@ -2,6 +2,7 @@
 library(data.table) # CRAN v1.14.2
 library(ggplot2)    # CRAN v3.4.2
 library(tikzDevice) # CRAN v0.12.3.1
+library(ggpubr)     # CRAN v0.4.0
 
 # Helper functions: -------------------------------------------------------
 source(here::here("code", "functions", "theme_gunning.R"))
@@ -17,6 +18,8 @@ theme_gunning()
 doc_width_cm <- 16
 doc_width_inches <- doc_width_cm *  0.3937
 
+# Read in Results: --------------------------------------------------------
+parameter_results_dt <- readRDS(file.path(outputs_path, "parameter_results_dt"))
 
 parameter_results_dt[,
                      beta_label_part_1 := fcase(
@@ -54,28 +57,66 @@ parameter_results_dt[, beta_label_part_1 := factor(
 
 
 parameter_results_dt[, dimension := factor(dimension, levels = c("Hip", "Knee", "Ankle"))]
-
 spline_names <- paste0("spline_", 1:4)
-p <- ggplot(data = parameter_results_dt[parameter %in% spline_names]) +
+p <- ggplot(data = parameter_results_dt[!(parameter %in% c(spline_names, "(Intercept)"))]) +
   aes(x = t) +
-  facet_wrap(dimension ~ beta_label_part_1, scales = "free_y") +
+  facet_wrap(dimension ~ beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
   geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
   geom_hline(yintercept = 0) +
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
-       y = "$\\beta_{0d}^{(p)} (t)$")
+       y = "$\\beta_{a}^{(p)} (t)$")
+
+p_hip <- ggplot(data = parameter_results_dt[dimension == "Hip" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
+  aes(x = t) +
+  facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
+  geom_line(aes(y = point_est)) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
+  geom_hline(yintercept = 0) +
+  geom_line(aes(y = pw_wald_lower), lty = 3) +
+  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  labs(x = "Normalised Time ($\\%$ of Stride)",
+       y = "$\\beta_{a}^{(hip)} (t)$",
+       title = "Hip")
+
+p_knee <- ggplot(data = parameter_results_dt[dimension == "Knee" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
+  aes(x = t) +
+  facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
+  geom_line(aes(y = point_est)) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
+  geom_hline(yintercept = 0) +
+  geom_line(aes(y = pw_wald_lower), lty = 3) +
+  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  labs(x = "Normalised Time ($\\%$ of Stride)",
+       y = "$\\beta_{a}^{(knee)} (t)$",
+       title = "Knee")
+
+p_ankle <- ggplot(data = parameter_results_dt[dimension == "Ankle" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
+  aes(x = t) +
+  facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
+  geom_line(aes(y = point_est)) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
+  geom_hline(yintercept = 0) +
+  geom_line(aes(y = pw_wald_lower), lty = 3) +
+  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  labs(x = "Normalised Time ($\\%$ of Stride)",
+       y = "$\\beta_{a}^{(ankle)} (t)$",
+       title = "Ankle")
+
+combined_plot <- ggarrange(p_hip, p_knee, p_ankle, nrow = 3)
 
 
-tikz(file.path(plots_path, "spline-coef-plot.tex"),
-     width = (4/3) * doc_width_inches, 
-     height = 1 * doc_width_inches,
+
+tikz(file.path(plots_path, "fixef_coef_plot.tex"),
+     width = 1 * doc_width_inches, 
+     height = (6/4) * doc_width_inches,
      standAlone = TRUE)
-print(p)
+print(combined_plot)
 dev.off()
 
-tinytex::lualatex(file.path(plots_path, "spline-coef-plot.tex"))
+tinytex::lualatex(file.path(plots_path, "fixef_coef_plot.tex"))
 
 
 
