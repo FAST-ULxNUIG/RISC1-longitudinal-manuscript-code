@@ -1,5 +1,6 @@
 require(progress) # CRAN v1.2.2
 require(lme4) # CRAN v1.1-30
+require(parallel)
 
 fit_spline_subject_ri_side <- function(df_scores,
                        K_retain,
@@ -10,7 +11,9 @@ fit_spline_subject_ri_side <- function(df_scores,
                                                             ftol_rel=0, 
                                                             ftol_abs=1e-10)),
                        REML = TRUE,
-                       diagonal_covariance = TRUE) {
+                       diagonal_covariance = TRUE,
+                       parallel = FALSE,
+                       ncores = 5) {
   # Step 0 - some routine checks before we start:
   if(!(is.data.frame(df_scores))) stop("df_scores must be a data frame.")
   if(!all(paste0("score_", seq_len(K_retain)) %in% names(df_scores))) {
@@ -36,19 +39,29 @@ fit_spline_subject_ri_side <- function(df_scores,
   rhs_formula <- paste(spline_formula, fixef_formula, ranef_formula, sep = " + ")
   
   # Step 3 - Fit series of scalar longitudinal models:
-  pb <- progress_bar$new(total = K_retain)
-  lme_fit_list <- vector(mode = "list", length = K_retain)
-  for(k in seq_len(K_retain)) {
-    pb$tick()
-    formula_k <- formula(
-      paste0("score_", k, " ~ ", rhs_formula)
-    )
-    lme_fit_list[[k]] <- lmer(formula = formula_k, 
-                              data = df_scores,
-                              control = control,
-                              REML = REML)
+  # can be done in parallell, hence the option:
+  if(!parallel) {
+    pb <- progress_bar$new(total = K_retain)
+    lme_fit_list <- vector(mode = "list", length = K_retain)
+    for(k in seq_len(K_retain)) {
+      pb$tick()
+      formula_k <- formula(
+        paste0("score_", k, " ~ ", rhs_formula)
+      )
+      lme_fit_list[[k]] <- lmer(formula = formula_k, 
+                                data = df_scores,
+                                control = control,
+                                REML = REML)
+    }
+  } else if(parallel) {
+    print("Fitting scalar mixed models in parrallell.")
+    mclapply(X = seq_len(K_retain), FUN = function(k) {
+      formula_k <- formula(paste0("score_", k, " ~ ", rhs_formula))
+      lmer(formula = formula_k, data = df_scores,
+           control = control, REML = REML)
+    }, mc.cores = ncores)
   }
-  
+
   # Step 4 - Return:
   list(spline_basis = spline_basis, lme_fit_list = lme_fit_list, K_retain = K_retain)
 }
@@ -111,5 +124,4 @@ extract_intercept_fd_spline <- function(fit_spline_object, pca_fd_obj) {
                                                              add_back_mean = TRUE)
   intercept_on_longitudinal_grid
 }
-
 
