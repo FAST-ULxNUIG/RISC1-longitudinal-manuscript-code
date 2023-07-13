@@ -49,6 +49,7 @@ knitr::opts_chunk$set(echo = TRUE)
      * :page_facing_up: [Conveninence function to load all functions for data analysis.](code/functions/source_all_analysis_functions.R)
      * :page_facing_up: [Conveninence functions for post processing results.](code/functions/post-processing-functions.R)
      * :page_facing_up: [Function to calculate rate of change in longitudinal direction](code/functions/calculate_rate_of_change.R)
+     * :page_facing_up: [Function to do bootstrap of subjects](code/functions/bootstrap_of_subjects.R)
      
   * :open_file_folder: **tests** -- some basic tests for the custom functions.
       * :page_facing_up: [Test for `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
@@ -61,6 +62,7 @@ knitr::opts_chunk$set(echo = TRUE)
        * :page_facing_up: [Test for `construct_fd_from_scores()`](code/functions/tests/test_construct_fd_from_scores.R)
        * :page_facing_up: [Tests for `calculate_rate_of_change()`](code/functions/tests/test_calculate_rate_of_change.R)
        * :page_facing_up: [Tests for `calculate_individual_prediction_errors()`](code/functions/tests/test_calculate_individual_prediction_errors.R)
+       * :page_facing_up: [Tests for `bootstrap_of_subjects()`](code/functions/tests/test_bootstrap_of_subjects.pdf)
 * :open_file_folder: **outputs**
    * :open_file_folder: **tables** -- tables containing data-analysis results. Some are stored as `.csv` files while others have been exported to $TeX$ using `{xtable}` for inclusion in the paper.
    * :open_file_folder: **figures** -- figures for the manuscript, all created in $TeX$ using `{tikzDevice}` and linked to overleaf, where the file [figures.tex](outputs/figures/figures.tex) compiles all the individual $TeX$ files.

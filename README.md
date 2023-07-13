@@ -102,6 +102,8 @@ Repeatedly-Observed Human-Movement Data’
       results.](code/functions/post-processing-functions.R)
     - :page_facing_up: [Function to calculate rate of change in
       longitudinal direction](code/functions/calculate_rate_of_change.R)
+    - :page_facing_up: [Function to do bootstrap of
+      subjects](code/functions/bootstrap_of_subjects.R)
   - :open_file_folder: **tests** – some basic tests for the custom
     functions.
     - :page_facing_up: [Test for
@@ -124,6 +126,8 @@ Repeatedly-Observed Human-Movement Data’
       `calculate_rate_of_change()`](code/functions/tests/test_calculate_rate_of_change.R)
     - :page_facing_up: [Tests for
       `calculate_individual_prediction_errors()`](code/functions/tests/test_calculate_individual_prediction_errors.R)
+    - :page_facing_up: [Tests for
+      `bootstrap_of_subjects()`](code/functions/tests/test_bootstrap_of_subjects.pdf)
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been

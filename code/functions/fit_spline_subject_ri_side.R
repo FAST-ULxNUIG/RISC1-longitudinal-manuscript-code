@@ -125,3 +125,13 @@ extract_intercept_fd_spline <- function(fit_spline_object, pca_fd_obj) {
   intercept_on_longitudinal_grid
 }
 
+check_singularity <- function(lme_fit_list) {
+  # check for any singularities that lme4 may have missed:
+  # for spline_subject_ri_side model, so only checks at subject
+  # level.
+  max(sapply(lme_fit_list, function(x) {
+    cormat <- attr(VarCorr(x)[["subject_id"]], "correlation")
+    abs(cormat[lower.tri(cormat)])
+  }) )
+}
+
