@@ -54,8 +54,8 @@ fit_spline_subject_ri_side <- function(df_scores,
                                 REML = REML)
     }
   } else if(parallel) {
-    print("Fitting scalar mixed models in parrallell.")
-    mclapply(X = seq_len(K_retain), FUN = function(k) {
+    print("Fitting scalar mixed models in parallel.")
+    lme_fit_list<-mclapply(X = seq_len(K_retain), FUN = function(k) {
       formula_k <- formula(paste0("score_", k, " ~ ", rhs_formula))
       lmer(formula = formula_k, data = df_scores,
            control = control, REML = REML)
