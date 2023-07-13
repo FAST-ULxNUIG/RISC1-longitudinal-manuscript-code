@@ -17,7 +17,8 @@ theme_gunning()
 doc_width_cm <- 16
 doc_width_inches <- doc_width_cm *  0.3937
 
-
+# Read in Results: --------------------------------------------------------
+parameter_results_dt <- readRDS(file.path(outputs_path, "parameter_results_dt"))
 parameter_results_dt[,
                      beta_label_part_1 := fcase(
                        parameter == "(Intercept)", "Intercept",
@@ -59,9 +60,9 @@ spline_names <- paste0("spline_", 1:4)
 p <- ggplot(data = parameter_results_dt[parameter %in% spline_names]) +
   aes(x = t) +
   facet_wrap(dimension ~ beta_label_part_1, scales = "free_y") +
+  geom_hline(yintercept = 0, col = "darkgrey") +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
-  geom_hline(yintercept = 0) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
