@@ -63,46 +63,46 @@ p <- ggplot(data = parameter_results_dt[!(parameter %in% c(spline_names, "(Inter
   facet_wrap(dimension ~ beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
   geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
-  geom_hline(yintercept = 0) +
+geom_hline(yintercept = 0, col = "darkgrey") +
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
-       y = "$\\beta_{a}^{(p)} (t)$")
+       y = "\\leftarrow $\\beta_{a}^{(p)} (t)$ \\rightarrow")
 
 p_hip <- ggplot(data = parameter_results_dt[dimension == "Hip" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
   aes(x = t) +
+  geom_hline(yintercept = 0, col = "darkgrey") +
   facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
-  geom_hline(yintercept = 0) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
-       y = "$\\beta_{a}^{(hip)} (t)$",
+       y = "$\\leftarrow$ Extension \\hspace{0.25cm} $\\beta_{a}^{(hip)} (t)$ \\hspace{0.25cm}  Flexion $\\rightarrow$",
        title = "Hip")
 
 p_knee <- ggplot(data = parameter_results_dt[dimension == "Knee" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
   aes(x = t) +
+  geom_hline(yintercept = 0, col = "darkgrey") +
   facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
-  geom_hline(yintercept = 0) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
-       y = "$\\beta_{a}^{(knee)} (t)$",
+       y = "$\\leftarrow$ Extension \\hspace{0.25cm} $\\beta_{a}^{(hip)} (t)$ \\hspace{0.25cm}  Flexion $\\rightarrow$",
        title = "Knee")
 
 p_ankle <- ggplot(data = parameter_results_dt[dimension == "Ankle" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
   aes(x = t) +
+  geom_hline(yintercept = 0, col = "darkgrey") +
   facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
-  geom_hline(yintercept = 0) +
+  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
-       y = "$\\beta_{a}^{(ankle)} (t)$",
+       y = "$\\leftarrow$ Plantarflexion \\hspace{0.05cm} $\\beta_{a}^{(ankle)} (t)$ \\hspace{0.05cm}  Dorsiflexion $\\rightarrow$",
        title = "Ankle")
 
 combined_plot <- ggarrange(p_hip, p_knee, p_ankle, nrow = 3)
@@ -117,6 +117,3 @@ print(combined_plot)
 dev.off()
 
 tinytex::lualatex(file.path(plots_path, "fixef_coef_plot.tex"))
-
-
-
