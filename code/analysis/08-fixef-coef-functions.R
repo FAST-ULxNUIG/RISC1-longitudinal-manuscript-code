@@ -90,7 +90,7 @@ p_knee <- ggplot(data = parameter_results_dt[dimension == "Knee" &!(parameter %i
   geom_line(aes(y = pw_wald_lower), lty = 3) +
   geom_line(aes(y = pw_wald_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
-       y = "$\\leftarrow$ Extension \\hspace{0.25cm} $\\beta_{a}^{(hip)} (t)$ \\hspace{0.25cm}  Flexion $\\rightarrow$",
+       y = "$\\leftarrow$ Extension \\hspace{0.25cm} $\\beta_{a}^{(knee)} (t)$ \\hspace{0.25cm}  Flexion $\\rightarrow$",
        title = "Knee")
 
 p_ankle <- ggplot(data = parameter_results_dt[dimension == "Ankle" &!(parameter %in% c(spline_names, "(Intercept)"))]) +
