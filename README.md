@@ -26,8 +26,9 @@ Repeatedly-Observed Human-Movement Data’
   - :page_facing_up: [05 - mv-FPCA basis
     Representation](code/analysis/05-basis-representation.R)
   - :page_facing_up: [06 - Linear Mixed Models of mv-FPCA
-    Scores](code/analysis/06-scores-modelling.R) ([extra
-    figures](code/analysis/06))
+    Scores](code/analysis/06-scores-modelling.R) ([Extra
+    Figures](code/analysis/06), [Bootstrap
+    Resampling](code/analysis/06-bootstrap.R))
   - :page_facing_up: 07 - Individual Random Effects Analysis ([Script
     1](code/analysis/07-individual-fitted-mv-FPC1.R), [Script
     2](code/analysis/07-individual-analysis-predictions.R), [Script
