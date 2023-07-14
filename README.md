@@ -2,39 +2,46 @@ Code for the paper ‘A Multivariate Longitudinal Functional Model for
 Repeatedly-Observed Human-Movement Data’
 ================
 
-![](outputs/figures/mocap-pic.pdf)
+![](outputs/figures/methods-schematic-readme.png)
 
 ## Repository Structure:
 
 ------------------------------------------------------------------------
 
 - :open_file_folder: **code**
-  - :open_file_folder: **analysis** – scripts used to perform the data
-    analysis.
-    - :page_facing_up: [01 - Create Plot for
-      Introduction](code/analysis/01-introduction-plot.R)
-    - :page_facing_up: [02 - Create Plot of Stride
-      Timings](code/analysis/02-strides-timing-plot.R)
-    - :page_facing_up: [03 - Prepare Data for
-      Analysis](code/analysis/03-data-preparation.R) ([extra
-      figures](code/analysis/03-data-preparation-extra-plot.R))
-    - :page_facing_up: [04 - Split Data into Test and Training
-      Samples](code/analysis/04-test-train-split.R)
-    - :page_facing_up: [05 - mv-FPCA basis
-      Representation](code/analysis/05-basis-representation.R)
-    - :page_facing_up: [06 - Linear Mixed Models of mv-FPCA
-      Scores](code/analysis/06-scores-modelling.R) ([extra
-      figures](code/analysis/06))
-    - :page_facing_up: 07 - Individual Random Effects Analysis ([Script
-      1](code/analysis/07-individual-fitted-mv-FPC1.R), [Script
-      2](code/analysis/07-individual-analysis-predictions.R), [Script
-      3](code/analysis/07-individual-analysis-test-error.R), [Script
-      4](code/analysis/07-individual-analysis-changes.R))
-    - :page_facing_up: 08 - Fixed Effects Analysis ([Script
-      1](code/analysis/08-fixef-results-post-processing.R), [Script
-      2](code/analysis/08-fixef-spline-coef.R))
-  - :open_file_folder: **functions** – custom functions for modelling
-    data analysis.
+  <details>
+  <summary>
+  📁 <b>analysis</b> – scripts used to perform the data analysis.
+  </summary>
+
+  - :page_facing_up: [01 - Create Plot for
+    Introduction](code/analysis/01-introduction-plot.R)
+  - :page_facing_up: [02 - Create Plot of Stride
+    Timings](code/analysis/02-strides-timing-plot.R)
+  - :page_facing_up: [03 - Prepare Data for
+    Analysis](code/analysis/03-data-preparation.R) ([extra
+    figures](code/analysis/03-data-preparation-extra-plot.R))
+  - :page_facing_up: [04 - Split Data into Test and Training
+    Samples](code/analysis/04-test-train-split.R)
+  - :page_facing_up: [05 - mv-FPCA basis
+    Representation](code/analysis/05-basis-representation.R)
+  - :page_facing_up: [06 - Linear Mixed Models of mv-FPCA
+    Scores](code/analysis/06-scores-modelling.R) ([extra
+    figures](code/analysis/06))
+  - :page_facing_up: 07 - Individual Random Effects Analysis ([Script
+    1](code/analysis/07-individual-fitted-mv-FPC1.R), [Script
+    2](code/analysis/07-individual-analysis-predictions.R), [Script
+    3](code/analysis/07-individual-analysis-test-error.R), [Script
+    4](code/analysis/07-individual-analysis-changes.R))
+  - :page_facing_up: 08 - Fixed Effects Analysis ([Script
+    1](code/analysis/08-fixef-results-post-processing.R), [Script
+    2](code/analysis/08-fixef-spline-coef.R))
+    </details>
+    <details>
+    <summary>
+    📁 <b>functions</b> – custom functions for modelling data analysis.
+    </summary>
+
     - :page_facing_up: [Centering a (multivariate) object around a
       different mean](code/functions/center_fd_around_new_mean.R)
     - :page_facing_up: [Decentering a (multivariate) object around a
@@ -106,30 +113,31 @@ Repeatedly-Observed Human-Movement Data’
       longitudinal direction](code/functions/calculate_rate_of_change.R)
     - :page_facing_up: [Function to do bootstrap of
       subjects](code/functions/bootstrap_of_subjects.R)
-  - :open_file_folder: **tests** – some basic tests for the custom
-    functions.
-    - :page_facing_up: [Test for
-      `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
-    - :page_facing_up: [Test for
-      `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
-    - :page_facing_up: [Test for
-      `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
-    - :page_facing_up: [Test for
-      `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
-    - :page_facing_up: [Test for
-      `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
-    - :page_facing_up: [Test 1 for
-      `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
-    - :page_facing_up: [Test 2 for
-      `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-02.R)
-    - :page_facing_up: [Test for
-      `construct_fd_from_scores()`](code/functions/tests/test_construct_fd_from_scores.R)
-    - :page_facing_up: [Tests for
-      `calculate_rate_of_change()`](code/functions/tests/test_calculate_rate_of_change.R)
-    - :page_facing_up: [Tests for
-      `calculate_individual_prediction_errors()`](code/functions/tests/test_calculate_individual_prediction_errors.R)
-    - :page_facing_up: [Tests for
-      `bootstrap_of_subjects()`](code/functions/tests/test_bootstrap_of_subjects.pdf)
+    - :open_file_folder: **tests** – some basic tests for the custom
+      functions.
+      - :page_facing_up: [Test for
+        `center_fd_around_new_mean()`](code/functions/tests/test-center_fd_around_new_mean.R)
+      - :page_facing_up: [Test for
+        `decenter_fd_around_new_mean()`](code/functions/tests/test-decenter_fd_around_new_mean.R)
+      - :page_facing_up: [Test for
+        `variance_explained_reconstruction()`](code/functions/tests/test-variance-explained-reconstruction.R)
+      - :page_facing_up: [Test for
+        `generate_design_multiple_subjects()`](code/functions/tests/test-generate-design.R)
+      - :page_facing_up: [Test for
+        `generate_polynomial_model_basis_coefficient()`](code/functions/tests/test-generate_polynomial_model_basis_coefficient.R)
+      - :page_facing_up: [Test 1 for
+        `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-01.R)
+      - :page_facing_up: [Test 2 for
+        `generate_basis_coefficient_matrix()`](code/functions/tests/test-generate-basis-coefficient-matrix-02.R)
+      - :page_facing_up: [Test for
+        `construct_fd_from_scores()`](code/functions/tests/test_construct_fd_from_scores.R)
+      - :page_facing_up: [Tests for
+        `calculate_rate_of_change()`](code/functions/tests/test_calculate_rate_of_change.R)
+      - :page_facing_up: [Tests for
+        `calculate_individual_prediction_errors()`](code/functions/tests/test_calculate_individual_prediction_errors.R)
+      - :page_facing_up: [Tests for
+        `bootstrap_of_subjects()`](code/functions/tests/test_bootstrap_of_subjects.pdf)
+        </details>
 - :open_file_folder: **outputs**
   - :open_file_folder: **tables** – tables containing data-analysis
     results. Some are stored as `.csv` files while others have been
@@ -140,9 +148,9 @@ Repeatedly-Observed Human-Movement Data’
     individual $TeX$ files.
   - 💾 also contains `.rds` objects saved at various stages of the data
     analysis
-- :open_file_folder: **data** – contains the main dataset used in
-  analysis and small data sets used to create the introduction and
-  stride-timing plots.
+  - :open_file_folder: **data** – contains the main dataset used in
+    analysis and small data sets used to create the introduction and
+    stride-timing plots (not publicly available).
 
 ## Reproducibility
 
