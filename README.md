@@ -2,6 +2,8 @@ Code for the paper ‘A Multivariate Longitudinal Functional Model for
 Repeatedly-Observed Human-Movement Data’
 ================
 
+![](outputs/figures/mocap-pic.pdf)
+
 ## Repository Structure:
 
 ------------------------------------------------------------------------
@@ -141,3 +143,45 @@ Repeatedly-Observed Human-Movement Data’
 - :open_file_folder: **data** – contains the main dataset used in
   analysis and small data sets used to create the introduction and
   stride-timing plots.
+
+## Reproducibility
+
+`sessionInfo()` from the model fit:
+
+    ## R version 4.1.2 (2021-11-01)
+    ## Platform: x86_64-apple-darwin17.0 (64-bit)
+    ## Running under: macOS Monterey 12.2.1
+    ## 
+    ## Matrix products: default
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+    ## 
+    ## locale:
+    ## [1] en_IE.UTF-8/en_IE.UTF-8/en_IE.UTF-8/C/en_IE.UTF-8/en_IE.UTF-8
+    ## 
+    ## attached base packages:
+    ## [1] parallel  splines   stats     graphics  grDevices utils     datasets 
+    ## [8] methods   base     
+    ## 
+    ## other attached packages:
+    ##  [1] refund_0.1-26     progress_1.2.2    lme4_1.1-30       data.table_1.14.2
+    ##  [5] fda_5.5.1         deSolve_1.30      fds_1.8           RCurl_1.98-1.6   
+    ##  [9] rainbow_3.6       pcaPP_1.9-74      MASS_7.3-55       Matrix_1.4-0     
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##  [1] mclust_5.4.9       Rcpp_1.0.10        here_1.0.1         mvtnorm_1.1-3     
+    ##  [5] lattice_0.20-45    prettyunits_1.1.1  assertthat_0.2.1   rprojroot_2.0.2   
+    ##  [9] digest_0.6.29      utf8_1.2.2         R6_2.5.1           magic_1.6-0       
+    ## [13] evaluate_0.15      pracma_2.3.8       ggplot2_3.4.2      pillar_1.7.0      
+    ## [17] rlang_1.1.1        rstudioapi_0.13    minqa_1.2.4        nloptr_2.0.0      
+    ## [21] grpreg_3.4.0       rmarkdown_2.11     desc_1.4.1         munsell_0.5.0     
+    ## [25] gamm4_0.2-6        compiler_4.1.2     xfun_0.29          pbs_1.1           
+    ## [29] pkgconfig_2.0.3    mgcv_1.8-38        htmltools_0.5.2    tidyselect_1.1.1  
+    ## [33] tibble_3.1.6       hdrcde_3.4         fansi_1.0.2        crayon_1.5.0      
+    ## [37] dplyr_1.0.8        brio_1.1.3         bitops_1.0-7       grid_4.1.2        
+    ## [41] nlme_3.1-155       gtable_0.3.0       lifecycle_1.0.3    DBI_1.1.2         
+    ## [45] magrittr_2.0.2     scales_1.2.1       KernSmooth_2.23-20 cli_3.6.0         
+    ## [49] testthat_3.1.4     ellipsis_0.3.2     vctrs_0.5.1        generics_0.1.2    
+    ## [53] boot_1.3-28        tools_4.1.2        glue_1.6.2         purrr_0.3.4       
+    ## [57] hms_1.1.1          ks_1.13.4          pkgload_1.3.0      abind_1.4-5       
+    ## [61] fastmap_1.1.0      yaml_2.3.5         colorspace_2.0-3   cluster_2.1.2     
+    ## [65] RLRsim_3.1-6       knitr_1.37

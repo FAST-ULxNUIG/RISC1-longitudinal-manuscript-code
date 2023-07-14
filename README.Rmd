@@ -7,6 +7,8 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+![](outputs/figures/mocap-pic.pdf)
+
 ## Repository Structure:  
 
 --- 
@@ -69,4 +71,12 @@ knitr::opts_chunk$set(echo = TRUE)
    * 💾 also contains `.rds` objects saved at various stages of the data analysis
 * :open_file_folder: **data** -- contains the main dataset used in analysis and small data sets used to create the introduction and stride-timing plots.
 
+## Reproducibility
+
+`sessionInfo()` from the model fit:
+
+```{r, echo = FALSE}
+model_fit_results <- readRDS(here::here("outputs", "model-fit-results.rds"))
+model_fit_results$session_info
+```
     

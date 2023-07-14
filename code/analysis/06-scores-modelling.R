@@ -79,7 +79,8 @@ saveRDS(
                         spline_ri_time = spline_ri_time,
                         fpca_time = fpca_time,
                         naive_time = naive_time),
-                covariates_and_scores_dt_train = covariates_and_scores_dt_train),
+                covariates_and_scores_dt_train = covariates_and_scores_dt_train,
+                session_info = sessionInfo()),
         here::here("outputs","model-fit-results.rds"))
 
 
