@@ -24,7 +24,7 @@ k_retain <- basis_transformation_results$k_retain
 
 # Set some parameters: ----------------------------------------------------
 n_cores <- parallel::detectCores() - 1
-B <- 20
+B <- 250
 fixef_formula_full <- "ris + sex + speed_cent + age_cent + height_cm_cent + weight_kg_cent"
 
 # -------------------------------------------------------------------------
