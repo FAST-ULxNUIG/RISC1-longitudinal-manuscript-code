@@ -18,6 +18,8 @@ theme_gunning()
 doc_width_cm <- 16
 doc_width_inches <- doc_width_cm *  0.3937
 
+theme_update(strip.text = element_text(size = 8.5))
+
 # Read in Results: --------------------------------------------------------
 parameter_results_dt <- readRDS(file.path(outputs_path, "parameter_results_dt"))
 
@@ -45,11 +47,11 @@ parameter_results_dt[, beta_label_part_1 := factor(
     "Spline Coefficient 2",
     "Spline Coefficient 3",
     "Spline Coefficient 4",
-    "Speed",
-    "Sex",
     "RIS: Injured $>2$ yr.",
     "RIS: Injured $1-2$ yr.",
     "RIS: Injured $<1$ yr.",
+    "Speed",
+    "Sex",
     "Age",
     "Weight",
     "Height"
@@ -62,10 +64,10 @@ p <- ggplot(data = parameter_results_dt[!(parameter %in% c(spline_names, "(Inter
   aes(x = t) +
   facet_wrap(dimension ~ beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25) +
+  geom_ribbon(mapping = aes(ymin = sim_boot_lower, ymax = sim_boot_upper), alpha = 0.25) +
 geom_hline(yintercept = 0, col = "darkgrey") +
-  geom_line(aes(y = pw_wald_lower), lty = 3) +
-  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  geom_line(aes(y = pw_boot_lower), lty = 3) +
+  geom_line(aes(y = pw_boot_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
        y = "\\leftarrow $\\beta_{a}^{(p)} (t)$ \\rightarrow")
 
@@ -74,9 +76,9 @@ p_hip <- ggplot(data = parameter_results_dt[dimension == "Hip" &!(parameter %in%
   geom_hline(yintercept = 0, col = "darkgrey") +
   facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
-  geom_line(aes(y = pw_wald_lower), lty = 3) +
-  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  geom_ribbon(mapping = aes(ymin = sim_boot_lower, ymax = sim_boot_upper), alpha = 0.25, fill = "cornflowerblue") +
+  geom_line(aes(y = pw_boot_lower), lty = 3) +
+  geom_line(aes(y = pw_boot_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
        y = "$\\leftarrow$ Extension \\hspace{0.25cm} $\\beta_{a}^{(hip)} (t)$ \\hspace{0.25cm}  Flexion $\\rightarrow$",
        title = "Hip")
@@ -86,9 +88,9 @@ p_knee <- ggplot(data = parameter_results_dt[dimension == "Knee" &!(parameter %i
   geom_hline(yintercept = 0, col = "darkgrey") +
   facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
-  geom_line(aes(y = pw_wald_lower), lty = 3) +
-  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  geom_ribbon(mapping = aes(ymin = sim_boot_lower, ymax = sim_boot_upper), alpha = 0.25, fill = "cornflowerblue") +
+  geom_line(aes(y = pw_boot_lower), lty = 3) +
+  geom_line(aes(y = pw_boot_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
        y = "$\\leftarrow$ Extension \\hspace{0.25cm} $\\beta_{a}^{(knee)} (t)$ \\hspace{0.25cm}  Flexion $\\rightarrow$",
        title = "Knee")
@@ -98,9 +100,9 @@ p_ankle <- ggplot(data = parameter_results_dt[dimension == "Ankle" &!(parameter 
   geom_hline(yintercept = 0, col = "darkgrey") +
   facet_wrap(~beta_label_part_1, scales = "free_y", ncol = 4) +
   geom_line(aes(y = point_est)) +
-  geom_ribbon(mapping = aes(ymin = sim_wald_lower, ymax = sim_wald_upper), alpha = 0.25, fill = "cornflowerblue") +
-  geom_line(aes(y = pw_wald_lower), lty = 3) +
-  geom_line(aes(y = pw_wald_upper), lty = 3) +
+  geom_ribbon(mapping = aes(ymin = sim_boot_lower, ymax = sim_boot_upper), alpha = 0.25, fill = "cornflowerblue") +
+  geom_line(aes(y = pw_boot_lower), lty = 3) +
+  geom_line(aes(y = pw_boot_upper), lty = 3) +
   labs(x = "Normalised Time ($\\%$ of Stride)",
        y = "$\\leftarrow$ Plantarflexion \\hspace{0.05cm} $\\beta_{a}^{(ankle)} (t)$ \\hspace{0.05cm}  Dorsiflexion $\\rightarrow$",
        title = "Ankle")

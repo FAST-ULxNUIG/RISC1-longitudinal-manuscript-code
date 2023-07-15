@@ -34,6 +34,7 @@ mfd_obj_test <- basis_transformation_results$mfd_obj_test
 # From model fitting results:
 spline_ri_model <- model_fit_results$spline_ri_model
 # And from Bootstrap:
+bootstrap_results <- bootstrap_results_list$bootstrap_results
 B <- 250 # no. of bootstrap replicates. ideally should have been saved!
 
 # Compute some necessary parameters: --------------------------------------
