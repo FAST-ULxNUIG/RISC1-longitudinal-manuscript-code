@@ -53,7 +53,7 @@ table1_dt[, ris := factor(ris, levels = c("never_injured",
 table1_dt[, sex := factor(sex, levels = c("male", "female"), labels = c("Male", "Female"))]
 setnames(table1_dt,
          old = c("ris", "speed", "sex", "age", "weight", "height"),
-         new = c("Retrospective Injury Status", "Speed (kmph)", "Sex", "Age (years)", "Weight (kg)", "Height (cm)"))
+         new = c("Retrospective Injury Status", "Speed (\\si{\\km \\per \\hour})", "Sex", "Age (years)", "Weight (kg)", "Height (cm)"))
 table1 <- datasummary_balance(~ 1, data = table1_dt[, - c("subject_id")],
                               output = "latex", escape = FALSE)
 table1 <- stringr::str_replace(table1,
