@@ -155,7 +155,8 @@ Repeatedly-Observed Human-Movement Data’
 
 ## Reproducibility
 
-`sessionInfo()` from the model fit:
+`sessionInfo()` from the model fit (`sessionInfo()` from the simulation
+can be found [here](code/simulation/simulation-information.pdf)):
 
     ## R version 4.1.2 (2021-11-01)
     ## Platform: x86_64-apple-darwin17.0 (64-bit)

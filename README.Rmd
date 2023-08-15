@@ -72,7 +72,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Reproducibility
 
-`sessionInfo()` from the model fit:
+`sessionInfo()` from the model fit (`sessionInfo()` from the simulation can be found [here](code/simulation/simulation-information.pdf)):
 
 ```{r, echo = FALSE}
 model_fit_results <- readRDS(here::here("outputs", "model-fit-results.rds"))
