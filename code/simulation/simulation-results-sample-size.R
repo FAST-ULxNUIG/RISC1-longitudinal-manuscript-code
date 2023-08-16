@@ -299,7 +299,7 @@ fixef_error_plot <- ggplot(data = fixef_error_dt_lng) +
   geom_boxplot(outlier.size = 0.5)  +
   labs(x = "$N$",
        colour = "Model:",
-       y = "$\\sqrt{\\text{MISE}}$",
+       y = "$\\sqrt{\\text{ISE}}$",
        title = "(d) Fixed Effects Estimation Error") +
   scale_x_continuous(breaks = c(280, 500, 1000))
 

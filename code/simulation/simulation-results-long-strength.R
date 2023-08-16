@@ -304,7 +304,7 @@ fixef_error_plot <- ggplot(data = fixef_error_dt_lng) +
   geom_boxplot(outlier.size = 0.5)  +
   labs(x = "Longitudinal Variation Strength",
        colour = "Model:",
-       y = "$\\sqrt{\\text{MISE}}$",
+       y = "$\\sqrt{\\text{ISE}}$",
        title = "(d) Fixed Effects Estimation Error") +
   scale_x_continuous(breaks = 1:3)
 
