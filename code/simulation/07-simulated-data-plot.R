@@ -51,7 +51,12 @@ plot_dt <- rbind(simulated_dt_lng, true_dt_lng)
 plot_dt[, dim := factor(dim, levels = c("Hip", "Knee", "Ankle"))]
 
 # -------------------------------------------------------------------------
-
+theme_update(strip.text = element_text(size = 10.5),
+             text = element_text(size = 10.5),
+             panel.grid.minor = element_blank(),
+             axis.title = element_text(size = 10.5),
+             legend.text = element_text(size = 10.5, hjust = 0.5),
+             plot.title = element_text(hjust = 0.5, size = 11, face = "bold"))
 
 p <- ggplot(data = plot_dt) +
   facet_grid(dim ~ type, scales = "free_y") +
@@ -59,16 +64,16 @@ p <- ggplot(data = plot_dt) +
   geom_line(alpha = 0.25) +
   theme(legend.position = "none") +
   scale_x_continuous(expand = c(0, 0)) +
+  theme(panel.spacing = unit(1, "lines")) +
   labs(y = "Angle ($^{\\circ}$)", x = "Normalised Time ($\\%$ of Stride)")
 
+p
 tikz(file.path(plots_path, "simulated-vs-true.tex"),
-     width = 0.85 * doc_width_inches, 
+     width = 0.9 * doc_width_inches, 
      height = 1 * doc_width_inches, 
      standAlone = TRUE)
 print(p)
 dev.off()
 
 tinytex::lualatex(file = file.path(plots_path, "simulated-vs-true.tex"))
-
-
 

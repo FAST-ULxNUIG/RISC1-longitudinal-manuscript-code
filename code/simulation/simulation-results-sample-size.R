@@ -47,18 +47,29 @@ N_sub_1000_prop_missing_0.1_long_strength_1 <- readRDS(
   )
 )
 
+N_sub_1000_prop_missing_0.1_long_strength_1_part_2 <- readRDS(
+  file.path(
+    simulation_results_path,
+    "N_sub_1000_prop_missing_0.1_long_strength_part_21.rds"
+  )
+)
+
 # -------------------------------------------------------------------------
 stopifnot(any(!sapply(N_sub_280_prop_missing_0.1_long_strength_1[1:500], is.null)))
 stopifnot(any(!sapply(N_sub_500_prop_missing_0.1_long_strength_1[1:500], is.null)))
 stopifnot(any(!sapply(N_sub_1000_prop_missing_0.1_long_strength_1[1:250], is.null)))
+stopifnot(any(!sapply(N_sub_1000_prop_missing_0.1_long_strength_1_part_2[1:250], is.null)))
 
 N_sub_280_prop_missing_0.1_long_strength_1$n_cores
 N_sub_500_prop_missing_0.1_long_strength_1$n_cores
 N_sub_1000_prop_missing_0.1_long_strength_1$n_cores
+N_sub_1000_prop_missing_0.1_long_strength_1_part_2$n_cores
 
 results_280 <- N_sub_280_prop_missing_0.1_long_strength_1[1:500]
 results_500 <- N_sub_500_prop_missing_0.1_long_strength_1[1:500]
 results_1000 <- N_sub_1000_prop_missing_0.1_long_strength_1[1:250]
+results_1000[251:500] <- N_sub_1000_prop_missing_0.1_long_strength_1[1:250]
+
 # -------------------------------------------------------------------------
 
 # Check for warnings: -----------------------------------------------------
@@ -86,8 +97,8 @@ sapply(results_1000, function(x) {
   x$pca$time
 }))
 
-pca_times_dt <- data.table(rep = c(rep(1:500, times = 2), 1:250), 
-           N = c(rep(c(280, 500), each = 500), rep(1000, times = 250)),
+pca_times_dt <- data.table(rep = c(rep(1:500, times = 2), 1:500), 
+           N = rep(c(280, 500, 1000), each = 500),
            time_secs = c(
              sapply(results_280, function(x) {x$pca$time}),
              sapply(results_500, function(x) {x$pca$time}),
@@ -117,7 +128,7 @@ model_times_500$rep <- 1:500
 model_times_500$N <- 500
 
 model_times_1000 <- extract_simulation_element(results_1000, extractor_function = extract_time)
-model_times_1000$rep <- 1:250
+model_times_1000$rep <- 1:500
 model_times_1000$N <- 1000
 
 
@@ -159,7 +170,7 @@ pred_error_500$rep <- 1:500
 pred_error_500$N <- 500
 
 pred_error_1000 <- extract_simulation_element(results_1000, extractor_function = extract_prediction_error)
-pred_error_1000$rep <- 1:250
+pred_error_1000$rep <- 1:500
 pred_error_1000$N <- 1000
 
 pred_error_dt <- data.table(rbind(pred_error_280, pred_error_500, pred_error_1000))
@@ -200,7 +211,7 @@ fixef_error_intercept_500$rep <- 1:500
 fixef_error_intercept_500$N <- 500
 
 fixef_error_intercept_1000 <- extract_simulation_element(results_1000, extractor_function = extract_intercept_error)
-fixef_error_intercept_1000$rep <- 1:250
+fixef_error_intercept_1000$rep <- 1:500
 fixef_error_intercept_1000$N <- 1000
 
 fixef_error_intercept_dt <- data.table(rbind(fixef_error_intercept_280, 
@@ -227,7 +238,7 @@ fixef_error_speed_500$rep <- 1:500
 fixef_error_speed_500$N <- 500
 
 fixef_error_speed_1000 <- extract_simulation_element(results_1000, extractor_function = extract_speed_error)
-fixef_error_speed_1000$rep <- 1:250
+fixef_error_speed_1000$rep <- 1:500
 fixef_error_speed_1000$N <- 1000
 
 fixef_error_speed_dt <- data.table(rbind(fixef_error_speed_280, fixef_error_speed_500, fixef_error_speed_1000))
@@ -254,7 +265,7 @@ fixef_error_sex_500$rep <- 1:500
 fixef_error_sex_500$N <- 500
 
 fixef_error_sex_1000 <- extract_simulation_element(results_1000, extractor_function = extract_sex_error)
-fixef_error_sex_1000$rep <- 1:250
+fixef_error_sex_1000$rep <- 1:500
 fixef_error_sex_1000$N <- 1000
 
 fixef_error_sex_dt <- data.table(rbind(fixef_error_sex_280, fixef_error_sex_500, fixef_error_sex_1000))

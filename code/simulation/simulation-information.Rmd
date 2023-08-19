@@ -130,14 +130,14 @@ N_sub_1000_prop_missing_0.1_long_strength_1[[1]]$session_info
 ### Part 2
 
 ```{r}
-N_sub_1000_prop_missing_0.1_long_strength_1 <- readRDS(
+N_sub_1000_prop_missing_0.1_long_strength_1_part_2 <- readRDS(
   file.path(
     simulation_results_path,
-    "N_sub_1000_prop_missing_0.1_long_strength_1.rds"
+    "N_sub_1000_prop_missing_0.1_long_strength_part_21.rds"
   )
 )
 # grab sessionInfo from first replicate:
-N_sub_1000_prop_missing_0.1_long_strength_1[[1]]$session_info
+N_sub_1000_prop_missing_0.1_long_strength_1_part_2[[1]]$session_info
 ```
 
-* For this scenario, there were `r N_sub_1000_prop_missing_0.1_long_strength_1[["n_cores"]]` cores used.
+* For this scenario, there were `r N_sub_1000_prop_missing_0.1_long_strength_1_part_2[["n_cores"]]` cores used.
