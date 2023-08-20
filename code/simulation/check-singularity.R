@@ -210,7 +210,7 @@ singularity_dt_summary[, c("poly", "spline_subject_ri_side", "fpca") := {
                                        c(1,2),
                                        function(x) {
                                          if(x != 0) {
-                                           paste0(x, " (", round(binomial_se(x, n = 500), 3), ")")
+                                           paste0(x, " (", round(binomial_se(x, n = 500 * 10), 3), ")")
                                          } else if(x == 0) {paste0(x)}
                                        }))
   names(my_list) <- c("poly", "spline_subject_ri_side", "fpca")
@@ -231,7 +231,7 @@ bold <- function(x) {
 Singularity_table <- xtable(singularity_dt_summary, 
                      digits = 0,
                      label = "tab:singularity-table",
-                     caption = "Proportion of singular fit warnings from the model fits. In cases where the proportion is non-zero, a monte-carlo standard error estimate for the true proportion is reported in brackets to convey uncertainty due to the finite number of simulations.")
+                     caption = "Proportion of singular fit warnings from the model fits. In cases where the proportion is non-zero, a Monte Carlo standard error estimate for the true proportion is reported in brackets to convey uncertainty due to the finite number of simulations.")
 align(Singularity_table)[1] <- "l"
 print(Singularity_table, 
       include.rownames = FALSE,
