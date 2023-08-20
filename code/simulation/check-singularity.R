@@ -210,7 +210,8 @@ singularity_dt_summary[, c("poly", "spline_subject_ri_side", "fpca") := {
                                        c(1,2),
                                        function(x) {
                                          if(x != 0) {
-                                           paste0(x, " (", round(binomial_se(x, n = 500 * 10), 3), ")")
+                                           
+                                           paste0(x, " (", ifelse(round(binomial_se(x, n = 500 * 10), 3) > 0, round(binomial_se(x, n = 500 * 10), 3), "< 0.001"), ")")
                                          } else if(x == 0) {paste0(x)}
                                        }))
   names(my_list) <- c("poly", "spline_subject_ri_side", "fpca")
