@@ -199,8 +199,7 @@ singularity_dt_summary <- singularity_dt[fpc_num %in% 1:10,
 
 singularity_dt_summary <- singularity_dt_summary[, -c("naive")]
 
-singularity_dt_summary[, apply(.SD, c(1:2), function(x) paste(x, "(", binomial_se(x, n = 500), ")")),
-                               .SDcols = c("poly", "spline_subject_ri_side", "fpca")]
+
 
 binomial_se <- function(phat, n) {
   sqrt((phat * (1-phat)) / n)
@@ -218,6 +217,13 @@ singularity_dt_summary[, c("poly", "spline_subject_ri_side", "fpca") := {
   my_list
 }, .SDcols = c("poly", "spline_subject_ri_side", "fpca")]
 
+
+dput(names(singularity_dt_summary))
+setnames(singularity_dt_summary, 
+         old = c("N", "prop_missing", "long_strength", "poly", "spline_subject_ri_side", 
+                 "fpca"),
+         new = c("$N$", "Prop. Missing", "Long. Strength", "Polynomial", "Spline", 
+                 "ml-FPCA"))
 
 bold <- function(x) {
   paste0("{\\bfseries ", x, "}") 
