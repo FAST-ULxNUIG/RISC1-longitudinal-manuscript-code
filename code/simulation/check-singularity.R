@@ -193,7 +193,7 @@ singularity_df <- rbind(
 singularity_dt <- as.data.table(singularity_df)
 dput(names(singularity_dt))
 singularity_dt_summary <- singularity_dt[fpc_num %in% 1:10,
-                                         as.list(round(apply(.SD, 2, mean, na.rm = TRUE), 4)),
+                                         as.list(round(apply(.SD, 2, mean, na.rm = TRUE), 3)),
                                          by = .(N, prop_missing, long_strength),
                                          .SDcols = c("poly", "naive", "spline_subject_ri_side", "fpca")]
 
@@ -210,7 +210,7 @@ singularity_dt_summary[, c("poly", "spline_subject_ri_side", "fpca") := {
                                        c(1,2),
                                        function(x) {
                                          if(x != 0) {
-                                           paste0(x, " (", round(binomial_se(x, n = 500), 4), ")")
+                                           paste0(x, " (", round(binomial_se(x, n = 500), 3), ")")
                                          } else if(x == 0) {paste0(x)}
                                        }))
   names(my_list) <- c("poly", "spline_subject_ri_side", "fpca")
@@ -226,7 +226,7 @@ setnames(singularity_dt_summary,
                  "ml-FPCA"))
 
 bold <- function(x) {
-  paste0("{\\bfseries ", x, "}") 
+  paste0("{\\bfseries \\small ", x, "}") 
 }
 Singularity_table <- xtable(singularity_dt_summary, 
                      digits = 0,
@@ -234,7 +234,6 @@ Singularity_table <- xtable(singularity_dt_summary,
                      caption = "Proportion of singular fit warnings from the model fits. In cases where the proportion is non-zero, a monte-carlo standard error estimate for the true proportion is reported in brackets to convey uncertainty due to the finite number of simulations.")
 align(Singularity_table)[1] <- "l"
 print(Singularity_table, 
-      latex.environments=c("myresizeenv"),
       include.rownames = FALSE,
       file = file.path(outputs_path, "tables", "Singularity-simulation.tex"),
       sanitize.text.function = function(x){x},
