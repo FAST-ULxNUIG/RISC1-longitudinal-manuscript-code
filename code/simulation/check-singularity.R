@@ -211,7 +211,7 @@ singularity_dt_summary[, c("poly", "spline_subject_ri_side", "fpca") := {
                                        function(x) {
                                          if(x != 0) {
                                            
-                                           paste0(x, " (", ifelse(round(binomial_se(x, n = 500 * 10), 3) > 0, round(binomial_se(x, n = 500 * 10), 3), "< 0.001"), ")")
+                                           paste0(x, " (", ifelse(round(binomial_se(x, n = 500 * 10), 3) > 0, round(binomial_se(x, n = 500 * 10), 3), "$<$ 0.001"), ")")
                                          } else if(x == 0) {paste0(x)}
                                        }))
   names(my_list) <- c("poly", "spline_subject_ri_side", "fpca")
@@ -223,7 +223,7 @@ dput(names(singularity_dt_summary))
 setnames(singularity_dt_summary, 
          old = c("N", "prop_missing", "long_strength", "poly", "spline_subject_ri_side", 
                  "fpca"),
-         new = c("$N$", "Prop. Missing", "Long. Strength", "Polynomial", "Spline", 
+         new = c("$N$", "Pr. Missing", "Lon. Strength", "Polynomial", "Spline", 
                  "ml-FPCA"))
 
 bold <- function(x) {
