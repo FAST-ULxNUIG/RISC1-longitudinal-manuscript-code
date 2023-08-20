@@ -234,6 +234,7 @@ Singularity_table <- xtable(singularity_dt_summary,
                      caption = "Proportion of singular fit warnings from the model fits. In cases where the proportion is non-zero, a monte-carlo standard error estimate for the true proportion is reported in brackets to convey uncertainty due to the finite number of simulations.")
 align(Singularity_table)[1] <- "l"
 print(Singularity_table, 
+      include.rownames = FALSE,
       file = file.path(outputs_path, "tables", "Singularity-simulation.tex"),
       sanitize.text.function = function(x){x},
       sanitize.colnames.function = bold,
