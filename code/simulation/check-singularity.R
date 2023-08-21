@@ -228,6 +228,7 @@ setnames(singularity_dt_summary,
 bold <- function(x) {
   paste0("{\\bfseries \\small ", x, "}") 
 }
+singularity_dt_summary[, `Pr. Missing` := paste(round(`Pr. Missing`,1))]
 Singularity_table <- xtable(singularity_dt_summary, 
                      label = "tab:singularity-table",
                      caption = "Proportion of singular fit warnings from the model fits. In cases where the proportion is non-zero, a Monte Carlo standard error estimate for the true proportion is reported in brackets to convey uncertainty due to the finite number of simulations.")
