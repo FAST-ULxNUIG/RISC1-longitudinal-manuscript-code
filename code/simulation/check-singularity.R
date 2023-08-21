@@ -191,7 +191,6 @@ singularity_df <- rbind(
 
 
 singularity_dt <- as.data.table(singularity_df)
-dput(names(singularity_dt))
 singularity_dt_summary <- singularity_dt[fpc_num %in% 1:10,
                                          as.list(round(apply(.SD, 2, mean, na.rm = TRUE), 3)),
                                          by = .(N, prop_missing, long_strength),
@@ -219,7 +218,7 @@ singularity_dt_summary[, c("poly", "spline_subject_ri_side", "fpca") := {
 }, .SDcols = c("poly", "spline_subject_ri_side", "fpca")]
 
 
-dput(names(singularity_dt_summary))
+
 setnames(singularity_dt_summary, 
          old = c("N", "prop_missing", "long_strength", "poly", "spline_subject_ri_side", 
                  "fpca"),
@@ -230,7 +229,6 @@ bold <- function(x) {
   paste0("{\\bfseries \\small ", x, "}") 
 }
 Singularity_table <- xtable(singularity_dt_summary, 
-                     digits = 0,
                      label = "tab:singularity-table",
                      caption = "Proportion of singular fit warnings from the model fits. In cases where the proportion is non-zero, a Monte Carlo standard error estimate for the true proportion is reported in brackets to convey uncertainty due to the finite number of simulations.")
 align(Singularity_table)[1] <- "l"
