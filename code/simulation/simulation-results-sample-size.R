@@ -112,7 +112,7 @@ pca_time_plot <- ggplot(data = pca_times_dt) +
       colour = "Model:",
       y = "Time (seconds)",
       title = "(a) Computation Time (mv-FPCA)") +
-  scale_x_continuous(breaks = c(280, 500, 1000))
+  scale_x_continuous(breaks = c(280, 500, 1000), labels = paste0("$N=", c(280, 500, 1000),"$"))
 
 pca_time_plot
 
@@ -146,11 +146,11 @@ model_times_dt_lng[, model := factor(model,
 model_fit_time_plot <- ggplot(data = model_times_dt_lng) +
   aes(x = N, group = interaction(N, model), colour = model, y = time_sec) +
   geom_boxplot(outlier.size = 0.5) +
-  labs(x = "$N$",
+  labs(x = "Number of Subjects",
        colour = "Model:",
        y = "Time (seconds)",
        title = "(b) Computation Time (Model Fit)") +
-  scale_x_continuous(breaks = c(280, 500, 1000))
+  scale_x_continuous(breaks = c(280, 500, 1000), labels = paste0("$N=", c(280, 500, 1000),"$"))
   
 model_fit_time_plot
 
@@ -191,7 +191,7 @@ pred_error_ISPE_plot <- ggplot(data = pred_error_dt_lng) +
        colour = "Model:",
        y = "ISPE",
        title = "(c) Individual Prediction Error") +
-  scale_x_continuous(breaks = c(280, 500, 1000))
+  scale_x_continuous(breaks = c(280, 500, 1000), labels = paste0("$N=", c(280, 500, 1000),"$"))
 
 pred_error_ISPE_plot 
 
@@ -308,11 +308,11 @@ fixef_error_plot <- ggplot(data = fixef_error_dt_lng) +
   facet_wrap(~ parameter, nrow = 1, ncol = 3, scales = "free_y") +
   aes(x = N, group = interaction(N, model), colour = model, y = sqrt(MISE)) +
   geom_boxplot(outlier.size = 0.5)  +
-  labs(x = "$N$",
+  labs(x = "Number of Subjects",
        colour = "Model:",
        y = "$\\sqrt{\\text{ISE}}$",
        title = "(d) Fixed Effects Estimation Error") +
-  scale_x_continuous(breaks = c(280, 500, 1000))
+  scale_x_continuous(breaks = c(280, 500, 1000), labels = paste0("$N=", c(280, 500, 1000),"$"))
 
 # Combine: ----------------------------------------------------------------
 top_panel <- ggarrange(pca_time_plot,
