@@ -286,10 +286,10 @@ fixef_error_dt_lng <- melt.data.table(fixef_error_dt_wide,
                                       value.factor = FALSE)
 
 fixef_error_dt_lng[, parameter := factor(parameter,
-                                         levels = c("intercept", "speed", "sex"),
+                                         levels = c("intercept", "sex", "speed"),
                                          labels = c("Intercept $\\boldsymbol{\\beta}_0 (t, T)$",
-                                                    "Speed $\\boldsymbol{\\beta}_1 (t)$",
-                                                    "Sex $\\boldsymbol{\\beta}_2 (t)$"))]
+                                                    "Sex $\\boldsymbol{\\beta}_1 (t)$",
+                                                    "Speed $\\boldsymbol{\\beta}_2 (t)$"))]
 
 fixef_error_dt_lng[, model := factor(model, 
                                      levels = c("poly", "naive", "spline_subject_ri_side", "fpca"),
