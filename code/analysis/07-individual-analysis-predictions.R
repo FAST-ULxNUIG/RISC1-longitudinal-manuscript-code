@@ -7,6 +7,7 @@ library(tikzDevice) # CRAN v0.12.3.1
 library(splines)
 library(data.table) # CRAN v1.14.2 
 library(ggpubr)     # CRAN v0.4.0
+library(ggh4x)      # CRAN v0.2.6
 
 # Load all helper functions: ----------------------------------------------
 source(here::here("code", "functions", "source_all_analysis_functions.R"))
@@ -112,7 +113,13 @@ p1 <- ggplot(data = P_4237_eval_dt_lng) +
   labs(y = "Angle ($^{\\circ}$)",
        x = "Normalised Time ($\\%$ of Stride)",
        colour = "Stride Number:") +
-  guides(colour = guide_legend(override.aes = list(linewidth = 1)))
+  guides(colour = guide_legend(override.aes = list(linewidth = 1))) +
+  ggh4x::facetted_pos_scales(y = list(
+    dimension == "Hip" ~ scale_y_continuous(limits = c(-20, 60)),
+    dimension == "Knee" ~ scale_y_continuous(limits = c(0, 125)),
+    dimension == "Ankle" ~ scale_y_continuous(limits = c(-20, 35))
+  ))
+
 
 p2 <- ggplot(data = P_4237_predicted_eval_dt_lng) +
   aes(x = t, y = angle, group = stride_num, colour= factor(stride_num)) +
@@ -123,7 +130,13 @@ p2 <- ggplot(data = P_4237_predicted_eval_dt_lng) +
   labs(y = "Angle ($^{\\circ}$)", 
        x = "Normalised Time ($\\%$ of Stride)", 
        colour = "Stride Number:") +
-  guides(colour = guide_legend(override.aes = list(linewidth = 1)))
+  guides(colour = guide_legend(override.aes = list(linewidth = 1))) +
+  ggh4x::facetted_pos_scales(y = list(
+    dimension == "Hip" ~ scale_y_continuous(limits = c(-20, 60)),
+    dimension == "Knee" ~ scale_y_continuous(limits = c(0, 125)),
+    dimension == "Ankle" ~ scale_y_continuous(limits = c(-20, 35))
+  ))
+  
 
 combined_plot <- ggarrange(p1, p2, nrow = 2, common.legend = TRUE, legend = "bottom") 
 
