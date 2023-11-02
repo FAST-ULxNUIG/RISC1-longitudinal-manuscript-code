@@ -153,6 +153,47 @@ Repeatedly-Observed Human-Movement Data’
     analysis and small data sets used to create the introduction and
     stride-timing plots (not publicly available).
 
+## Model Fit Times
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Time (mins)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+spline_ri
+</td>
+<td style="text-align:right;">
+10.52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fpca
+</td>
+<td style="text-align:right;">
+3.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+naive
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Reproducibility
 
 `sessionInfo()` from the model fit (`sessionInfo()` from the simulation

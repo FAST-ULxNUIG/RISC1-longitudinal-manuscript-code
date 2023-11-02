@@ -70,6 +70,15 @@ knitr::opts_chunk$set(echo = TRUE)
   - 💾 also contains `.rds` objects saved at various stages of the data analysis
   - :open_file_folder: **data** -- contains the main dataset used in analysis and small data sets used to create the introduction and stride-timing plots (not publicly available).
 
+## Model Fit Times
+
+```{r, echo = FALSE}
+times_df <- readRDS(file = here::here("outputs/tables/model-fit-times.rds"))
+rownames(times_df) <- NULL
+times_df$Model <- stringr::str_remove(times_df$Model, "_time")
+kableExtra::kable(times_df, col.names = c("Model", "Time (mins)"))
+```
+
 ## Reproducibility
 
 `sessionInfo()` from the model fit (`sessionInfo()` from the simulation can be found [here](code/simulation/simulation-information.pdf)):
